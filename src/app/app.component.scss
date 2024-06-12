@@ -1,0 +1,30 @@
+.drawer-left{
+    width:200px;
+    background-color: rgb(255, 196, 247);
+    border-radius: 0px;
+}
+.drawer-right{
+    width:400px;
+    background-color: rgb(196, 251, 255);
+    border-radius: 0px;
+}
+
+/*Removes the default border radius*/
+.mat-drawer.mat-drawer-end{
+    border-radius: 0px;
+}
+@media all and (max-width:500px){
+    .menu-left-buton-burguer{display: block;}
+    .menu-left-menu-options{display: none;}
+}
+@media all and (min-width:500px){
+    .menu-left-buton-burguer{display: none;}
+    .menu-left-menu-options{display: block;}
+}
+
+.menu-fexbox-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;/*If you do not put the 100%, the elements are not separated*/
+}
