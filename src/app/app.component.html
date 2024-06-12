@@ -24,7 +24,7 @@
 </mat-toolbar>
 
 <mat-drawer-container class="mat-drawer-container" hasBackdrop="false">
-    <mat-drawer #appDrawerLeft class="drawer-left" opened="false" position="start">
+    <mat-drawer #appDrawerLeft class="drawer-left" mode="push" opened="false" position="start">
         <div class="drawer-left-menu-options">
             <button routerLinkActive="mat-accent" routerLink="home">Home</button>
             <br>
@@ -35,8 +35,10 @@
     </mat-drawer>
     <mat-drawer #appDrawerRight class="drawer-right" mode="over" opened="false" position="end">
         <div class="drawer-right-div-container"><p>Right sidenav</p></div>
+        <router-outlet name="right-sidenav"></router-outlet>
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet />
+        <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
+<footer></footer>

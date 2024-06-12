@@ -1,5 +1,7 @@
 # MetatierrascolWeb
 
+Necesitas versión 22.2.0 de node y 18.0.3 de angular
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
 
 ## Development server
