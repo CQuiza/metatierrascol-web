@@ -29,7 +29,7 @@
     <mat-drawer #appDrawerLeft class="drawer-left" mode="push" opened="false" position="start">
         <div class="drawer-left-menu-options border-top-white" cdkMenu>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home"><mat-icon class="padding-rigth-10">home</mat-icon>Inicio</button>
-            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help"><mat-icon class="padding-rigth-10">map</mat-icon>Mapa</button>
+            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="map"><mat-icon class="padding-rigth-10">map</mat-icon>Mapa</button>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help"><mat-icon class="padding-rigth-10">help</mat-icon>Ayuda</button>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>
         </div>     
@@ -39,6 +39,7 @@
     <mat-drawer #appDrawerRight class="drawer-right" mode="over" opened="false" position="end">
         <div class="menu-container border-top-white">
             <div class="menu-left-menu-options" cdkMenu>
+                <!--Parece que se puede lanzar rutas a varios routers a la vez-->
                 <!--[routerLink]="[{ outlets: { primary: [''], sidebar: ['about'] } }]"-->
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" [routerLink]="['',{outlets: {right_sidenav:['baunit'] }}]">Predio</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" [routerLink]="['',{outlets: {right_sidenav:['party'] }}]">Propietarios</button>
