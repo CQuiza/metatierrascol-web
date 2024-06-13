@@ -14,5 +14,4 @@ import { MatIconModule } from '@angular/material/icon'
 })
 export class AppComponent {
   title = 'metatierrascol-web';
-  a=25;
 }

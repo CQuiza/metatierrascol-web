@@ -1,44 +1,51 @@
 
-<mat-toolbar>
-    <div class="menu-fexbox-container">
-        <div class="menu-left">
+<div class="horizontal-menu">
+    <div class="menu-container">
+        <div class="menu-left-container">
             <div class="menu-left-buton-burguer">
-                <button (click)="appDrawerLeft.toggle()" mat-icon-button class="burguer">
+                <button class="normal-menu-item" (click)="appDrawerLeft.toggle()" mat-icon-button>
                     <mat-icon>menu</mat-icon>
                 </button>
             </div>
-            <div class="menu-left-menu-options">
-                <button routerLinkActive="mat-accent" routerLink="home">Home</button>
-                <button routerLinkActive="mat-accent" routerLink="help">Help</button>
-                <button routerLinkActive="mat-accent" routerLink="about">About</button>
-            </div>    
+            <div class="menu-left-menu-options" cdkMenu>
+                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Home</button>
+                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="help">Help</button>
+                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="about">About</button>
+            </div>     
         </div>
         <div class="menu-right">
             @if (!appDrawerRight.opened) {
-                <button routerLinkActive="mat-accent" (click)="appDrawerRight.toggle()" ><mat-icon>keyboard_arrow_left</mat-icon></button>
+                <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="appDrawerRight.toggle()" ><mat-icon>keyboard_arrow_left</mat-icon></button>
             }@else{
-                <button routerLinkActive="mat-accent" (click)="appDrawerRight.toggle()" ><mat-icon>keyboard_arrow_right</mat-icon></button>
+                <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="appDrawerRight.toggle()" ><mat-icon>close</mat-icon></button>
             }
         </div>
     </div>
-</mat-toolbar>
+</div>
 
 <mat-drawer-container class="mat-drawer-container" hasBackdrop="false">
     <mat-drawer #appDrawerLeft class="drawer-left" mode="push" opened="false" position="start">
-        <div class="drawer-left-menu-options">
-            <button routerLinkActive="mat-accent" routerLink="home">Home</button>
-            <br>
-            <button routerLinkActive="mat-accent" routerLink="help">Help</button>
-            <br>
-            <button routerLinkActive="mat-accent" routerLink="about">About</button>
-        </div>
+        <div class="drawer-left-menu-options" cdkMenu>
+            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home"><mat-icon class="padding-rigth-10">home</mat-icon>Home</button>
+            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help"><mat-icon class="padding-rigth-10">help</mat-icon>Help</button>
+            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about"><mat-icon class="padding-rigth-10">people</mat-icon>About</button>
+        </div>     
     </mat-drawer>
     <mat-drawer #appDrawerRight class="drawer-right" mode="over" opened="false" position="end">
-        <div class="drawer-right-div-container"><p>Right sidenav</p></div>
-        <router-outlet name="right-sidenav"></router-outlet>
+        <div class="drawer-right-div-container">
+            <p>Right sidenav</p>
+            <p>Right sidenav</p>
+            <p>Right sidenav</p>
+            <p>Right sidenav</p>
+            <p>Right sidenav</p>
+            <router-outlet name="right-sidenav"></router-outlet>
+        </div>
+        
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet></router-outlet>
+        <div class="height100">
+            <router-outlet></router-outlet>
+        </div>
     </mat-drawer-content>
 </mat-drawer-container>
 <footer></footer>
