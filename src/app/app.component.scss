@@ -82,11 +82,16 @@
     height: 95vh;
 }
 
+.border-top-white{
+    border-top: 2px solid white;
+}
+
 /*Must be at the end because overwrites the previous
 rules*/
+
 @media all and (max-width:500px){
     .menu-left-buton-burguer{display: block;}
-    .menu-left-menu-options{display: none;}
+    .hide-less-500{display: none;}
     .drawer-right{width: 100%;}
 }
 @media all and (min-width:500px){

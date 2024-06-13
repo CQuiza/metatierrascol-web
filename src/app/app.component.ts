@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule} from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
 
 
@@ -14,4 +14,16 @@ import { MatIconModule } from '@angular/material/icon'
 })
 export class AppComponent {
   title = 'metatierrascol-web';
+  @ViewChild('appDrawerLeft') appDrawerLeft: MatDrawer = {} as MatDrawer;
+  @ViewChild('appDrawerRight') appDrawerRight: MatDrawer = {} as MatDrawer;
+  constructor(){}
+  toggleAppDrawerLeft(){
+    this.appDrawerLeft.toggle();
+    if (this.appDrawerLeft.opened){this.appDrawerRight.close()}
+  }
+  toggleAppDrawerRight(){
+    this.appDrawerRight.toggle();
+    if (this.appDrawerRight.opened){this.appDrawerLeft.close()}
+  }
+
 }
