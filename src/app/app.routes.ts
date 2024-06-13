@@ -7,6 +7,7 @@ import { BaunitComponent } from './components/baunit/baunit/baunit.component';
 import { PartyComponent } from './components/party/party/party.component';
 import { SourceComponent } from './components/source/source/source.component';
 import { ImageComponent } from './components/source/image/image.component';
+import { MobileAppComponent } from './components/mobile-app/mobile-app/mobile-app.component';
 
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
     {path: 'about', component:AboutComponent},
     {path: 'map', component:MapComponent},
     {path: 'home', component:HomeComponent},
+    {path: 'mobile_app', component:MobileAppComponent},
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav'},
     {path: 'party', component:PartyComponent, outlet:'right_sidenav'},
     {path: 'source', component:SourceComponent, outlet:'right_sidenav'},
