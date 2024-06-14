@@ -46,6 +46,10 @@
     width: 100%;
     margin-top: 10px;
   }
+
+.login-buttons{
+    min-width: 0px;
+}
   
 .padding-rigth-10{
     padding-right: 10px;
@@ -88,6 +92,17 @@
 
 /*Must be at the end because overwrites the previous
 rules*/
+
+.menu-right{
+    display: flex;
+    align-items: center;
+}
+
+.color-white{color:white}
+
+.icon-blue{
+    color:blue;
+}
 
 @media all and (max-width:500px){
     .menu-left-buton-burguer{display: block;}

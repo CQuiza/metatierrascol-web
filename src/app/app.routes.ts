@@ -8,6 +8,9 @@ import { PartyComponent } from './components/party/party/party.component';
 import { SourceComponent } from './components/source/source/source.component';
 import { ImageComponent } from './components/source/image/image.component';
 import { MobileAppComponent } from './components/mobile-app/mobile-app/mobile-app.component';
+import { AppUserComponent } from './components/auth/app-user/app-user.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { LogoutComponent } from './components/auth/logout/logout.component';
 
 
 export const routes: Routes = [
@@ -17,6 +20,10 @@ export const routes: Routes = [
     {path: 'map', component:MapComponent},
     {path: 'home', component:HomeComponent},
     {path: 'mobile_app', component:MobileAppComponent},
+    {path: 'app_user', component:AppUserComponent},
+    {path: 'login', component:LoginComponent},
+    {path: 'logout', component:LogoutComponent},
+
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav'},
     {path: 'party', component:PartyComponent, outlet:'right_sidenav'},
     {path: 'source', component:SourceComponent, outlet:'right_sidenav'},

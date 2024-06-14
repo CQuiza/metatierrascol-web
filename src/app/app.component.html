@@ -18,11 +18,30 @@
             </div>     
         </div>
         <div class="menu-right">
-            @if (!appDrawerRight.opened) {
-                <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>keyboard_arrow_left</mat-icon></button>
-            }@else{
-                <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>close</mat-icon></button>
+            @if (getUserLoggedIn()){
+                <div class="menu-right-columns">
+                    <div class="color-white">U: {{getUsername()}}</div>
+                    <div class="color-white">G: {{getUsergroups()}}</div>
+                </div>
             }
+            <div class="menu-right-in-line">
+                @if (getUserLoggedIn()){
+                    <button cdkMenuItem class="normal-menu-item login-buttons" (click)="logout()"><mat-icon style="transform:rotate(180deg);">input</mat-icon></button>
+                }@else {
+                    <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="app_user"><mat-icon>person_add</mat-icon></button>
+                    <button cdkMenuItem class="normal-menu-item login-buttons" (click)="login()"><mat-icon>input</mat-icon></button>    
+                }
+                @if (!showMessages){
+                    <button cdkMenuItem class="normal-menu-item login-buttons" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>
+                }@else {
+                    <button cdkMenuItem class="normal-menu-item login-buttons icon-blue" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>
+                }
+                @if (!appDrawerRight.opened) {
+                    <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>arrow_back</mat-icon></button>
+                }@else{
+                    <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>close</mat-icon></button>
+                }
+            </div>
         </div>
     </div>
 </div>
@@ -57,6 +76,7 @@
     </mat-drawer>
     <mat-drawer-content>
         <div class="height100">
+            @if (showMessages){ <app-message></app-message>}
             <router-outlet></router-outlet>
         </div>
     </mat-drawer-content>
