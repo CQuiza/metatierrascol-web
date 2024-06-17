@@ -11,6 +11,9 @@ import { MobileAppComponent } from './components/mobile-app/mobile-app/mobile-ap
 import { AppUserComponent } from './components/auth/app-user/app-user.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
+import { isLoggedInGuard } from './guards/is-logged-in.guard';
+import { YouDontHavePermissionComponent } from './components/auth/you-dont-have-permission/you-dont-have-permission.component';
+import { belongsToGroupGuard } from './guards/belongs-to-group.guard';
 
 
 export const routes: Routes = [
@@ -24,8 +27,12 @@ export const routes: Routes = [
     {path: 'login', component:LoginComponent},
     {path: 'logout', component:LogoutComponent},
 
-    {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav'},
-    {path: 'party', component:PartyComponent, outlet:'right_sidenav'},
-    {path: 'source', component:SourceComponent, outlet:'right_sidenav'},
-    {path: 'image', component:ImageComponent, outlet:'right_sidenav'},
+    {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
+        canActivate:[belongsToGroupGuard],
+        data:{allowedGroups: ['topografo']}
+    },
+    {path: 'party', canActivate:[isLoggedInGuard], component:PartyComponent, outlet:'right_sidenav'},
+    {path: 'source', canActivate:[isLoggedInGuard], component:SourceComponent, outlet:'right_sidenav'},
+    {path: 'image', canActivate:[isLoggedInGuard], component:ImageComponent, outlet:'right_sidenav'},
+    {path: 'you_dont_have_permission', component:YouDontHavePermissionComponent, outlet:'right_sidenav'}
 ];

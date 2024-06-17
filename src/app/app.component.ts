@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
-import { AuthServiceService } from './services/auth-service.service';
+import { AuthService } from './services/auth.service';
 import { MessageComponent } from './components/message/message.component';
 
 
@@ -22,8 +22,8 @@ export class AppComponent {
   @ViewChild('appDrawerLeft') appDrawerLeft: MatDrawer = {} as MatDrawer;
   @ViewChild('appDrawerRight') appDrawerRight: MatDrawer = {} as MatDrawer;
 
-  constructor(private authService: AuthServiceService){
-    authService.isLoggedIn();
+  constructor(private authService: AuthService){
+    authService.login();
   }
   toggleAppDrawerLeft(){
     this.appDrawerLeft.toggle();
@@ -40,17 +40,9 @@ export class AppComponent {
     return this.authService.username;
   }
   getUsergroups(){
-  
-    if (!this.authService.userLoggedIn){return ""}
-    var userGroups="";
-    this.authService.usergroups.forEach(group => {
-      userGroups = group + ', '
-    });
-    userGroups = userGroups.substring(0, userGroups.length - 2);
-    return userGroups    
-    
+    return this.authService.getUsergroupsAsString();    
   }
-  getUserLoggedIn(){return this.authService.userLoggedIn}
+  getUserLoggedIn(){return this.authService.isLoggedIn}
   logout(){this.authService.logout();}
   login(){this.authService.login()}
 }
