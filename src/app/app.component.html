@@ -26,10 +26,10 @@
             }
             <div class="menu-right-in-line">
                 @if (getUserLoggedIn()){
-                    <button cdkMenuItem class="normal-menu-item login-buttons" (click)="logout()"><mat-icon style="transform:rotate(180deg);">input</mat-icon></button>
+                    <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="logout"><mat-icon style="transform:rotate(180deg);">input</mat-icon></button>
                 }@else {
                     <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="app_user"><mat-icon>person_add</mat-icon></button>
-                    <button cdkMenuItem class="normal-menu-item login-buttons" (click)="login()"><mat-icon>input</mat-icon></button>    
+                    <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="login"><mat-icon>input</mat-icon></button>    
                 }
                 @if (!showMessages){
                     <button cdkMenuItem class="normal-menu-item login-buttons" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>

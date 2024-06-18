@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
 import { AuthService } from './services/auth.service';
 import { MessageComponent } from './components/message/message.component';
+import { SidenavsService } from './services/sidenavs.service';
 
 
 @Component({
@@ -16,22 +17,20 @@ import { MessageComponent } from './components/message/message.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
   title = 'metatierrascol-web';
   showMessages=false;
   @ViewChild('appDrawerLeft') appDrawerLeft: MatDrawer = {} as MatDrawer;
   @ViewChild('appDrawerRight') appDrawerRight: MatDrawer = {} as MatDrawer;
 
-  constructor(private authService: AuthService){
+  constructor (private authService: AuthService, private sidenavsService: SidenavsService){
     authService.login();
   }
   toggleAppDrawerLeft(){
-    this.appDrawerLeft.toggle();
-    if (this.appDrawerLeft.opened){this.appDrawerRight.close()}
+    this.sidenavsService.toggleAppDrawerLeft();
   }
   toggleAppDrawerRight(){
-    this.appDrawerRight.toggle();
-    if (this.appDrawerRight.opened){this.appDrawerLeft.close()}
+    this.sidenavsService.toggleAppDrawerRight();
   }
   toggleShowMessages(){
     this.showMessages=!this.showMessages;
@@ -43,6 +42,14 @@ export class AppComponent {
     return this.authService.getUsergroupsAsString();    
   }
   getUserLoggedIn(){return this.authService.isLoggedIn}
-  logout(){this.authService.logout();}
-  login(){this.authService.login()}
+
+  ngAfterViewInit(): void {
+    /**
+     * After the view is completed I can get the elements
+     * and put them into the service, in order to be
+     * available for the rest of the components
+     */
+    this.sidenavsService.setAppDrawerLeft(this.appDrawerLeft);
+    this.sidenavsService.setAppDrawerRight(this.appDrawerRight);
+  }
 }

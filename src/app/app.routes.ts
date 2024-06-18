@@ -14,6 +14,7 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
 import { isLoggedInGuard } from './guards/is-logged-in.guard';
 import { YouDontHavePermissionComponent } from './components/auth/you-dont-have-permission/you-dont-have-permission.component';
 import { belongsToGroupGuard } from './guards/belongs-to-group.guard';
+import { BlankComponent } from './components/auth/blank/blank.component';
 
 
 export const routes: Routes = [
@@ -34,5 +35,6 @@ export const routes: Routes = [
     {path: 'party', canActivate:[isLoggedInGuard], component:PartyComponent, outlet:'right_sidenav'},
     {path: 'source', canActivate:[isLoggedInGuard], component:SourceComponent, outlet:'right_sidenav'},
     {path: 'image', canActivate:[isLoggedInGuard], component:ImageComponent, outlet:'right_sidenav'},
-    {path: 'you_dont_have_permission', component:YouDontHavePermissionComponent, outlet:'right_sidenav'}
+    {path: 'you_dont_have_permission', component:YouDontHavePermissionComponent, outlet:'right_sidenav'},
+    {path: 'blank', component:BlankComponent, outlet:'right_sidenav'}
 ];
