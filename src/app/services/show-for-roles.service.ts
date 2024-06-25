@@ -1,5 +1,7 @@
+import { Injectable } from '@angular/core';
+
 /**
- * This function keeps, in only one point, who is able to see what in a template.
+ * This service keeps, in only one point, who is able to see what in a template.
  * 
  * Returns the list of groups that are able to view a component template
  * element, as a menu element or button.
@@ -10,24 +12,32 @@
  * the groups, or roles, of the user.
  * In the component you must have a method called showForRoles:
  *  showForRoles(elementTemplateName): string[]
- *      return showForRolesInComponent('app.component', elementTemplateName)
- * In showForRolesInComponent you manually set the name of the component, the
- * name of the element template, and the groups that are able to see
- * the component template 
- * 
+ *      return this.showForRolesService.getAllowedRoles('app.component', elementTemplateName)
+ * Manually set, in the methid 'getAllowedRoles' the name of the component, template elements name, 
+ * and the groups that are able to see the component template object.
+*/
+@Injectable({
+  providedIn: 'root'
+})
+export class ShowForRolesService {
+  public allowedRoles: string[]=[];
+  constructor() { }
+
+
+/** 
  * @param {string} componentName - the name of the component 
  * @param {string} elementTemplateName - the element template name
  * @returns {string[]} - Eg: ['admin', 'surveyor']
  */
-export function showForRolesInComponent(componentName:string, elementTemplateName:string): string[]{
+  getAllowedRoles(componentName:string, elementTemplateName:string): string[]{
     switch(componentName){
         case 'app.component':{
             switch(elementTemplateName){
-                case 'administracion':{return ['admin']; break;}
-                default: {return []; break;}
+                case 'admin-menu':{return ['admin'];}
+                default: {return [];}
             }
         }
-        default: {return [];break;}
+        default: {return [];}
     }
-
+  }
 }

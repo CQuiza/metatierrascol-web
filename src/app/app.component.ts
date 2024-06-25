@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { MessageComponent } from './components/message/message.component';
 import { SidenavsService } from './services/sidenavs.service';
 import { ShowForRolesDirective } from './directives/show-for-roles.directive';
+import { ShowForRolesService } from './services/show-for-roles.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class AppComponent implements AfterViewInit{
   @ViewChild('appDrawerLeft') appDrawerLeft: MatDrawer = {} as MatDrawer;
   @ViewChild('appDrawerRight') appDrawerRight: MatDrawer = {} as MatDrawer;
 
-  constructor (private authService: AuthService, private sidenavsService: SidenavsService){
+  constructor (private authService: AuthService, private sidenavsService: SidenavsService,
+    private showForRolesService: ShowForRolesService){
     authService.login();
   }
   toggleAppDrawerLeft(){
@@ -43,6 +45,10 @@ export class AppComponent implements AfterViewInit{
     return this.authService.userGroups.join(', ');    
   }
   getUserLoggedIn(){return this.authService.isLoggedIn}
+
+  showForRoles(elementTemplateName:string):string[]{
+    return this.showForRolesService.getAllowedRoles('app.component', elementTemplateName);
+  }
 
   ngAfterViewInit(): void {
     /**

@@ -11,7 +11,7 @@
             </div>
             <div class="menu-left-menu-options hide-less-500" cdkMenu>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Inicio</button>
-                <button *showForRoles="['mapa']" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
+                <button *showForRoles="showForRoles('admin-menu')" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app">App</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="help">Ayuda</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="about">Acerca de</button>
