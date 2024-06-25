@@ -30,9 +30,11 @@ export class ShowForRolesDirective implements OnInit{
       /**
        * Keeps the element of the template 
        * this.allowedRoles?.flat(1) gets an array from the allowedRoles object*/
+      console.log('Creating',this.authService.userGroups, this.allowedRoles?.flat(1))
       this.viewContainerRef.createEmbeddedView(this.templateRef);
     }else{
       /**removes the element of the template */
+      console.log('Removing',this.authService.userGroups, this.allowedRoles?.flat(1))
       this.viewContainerRef.clear();
     }
   }

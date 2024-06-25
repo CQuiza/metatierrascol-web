@@ -1,21 +1,34 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DataService } from './data.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  authToken="Token theToken"
   username = ""
   userGroups:string[]=[]
   isLoggedIn=false;
-  constructor(private dataService: DataService) { }
-
-  login(){
-    this.isLoggedIn=true;
-    this.username='joamona@cgf.upv.es';
-    this.userGroups=['topografo', 'admin'];
+  constructor(private httpClient:HttpClient) { 
   }
 
+  login(){
+    //this.isLoggedIn=true;
+    //this.username='joamona@cgf.upv.es';
+    //this.userGroups=['topografo', 'admin'];
+    this.httpClient.post(environment.apiUrl + 'core/knox/login/',
+      {'username':'admin', 'password':'admin'}).subscribe(
+        data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+    
+    
+    }
   logout(){
     this.isLoggedIn=false;
     this.username=''
