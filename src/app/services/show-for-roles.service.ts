@@ -7,14 +7,19 @@ import { Injectable } from '@angular/core';
  * element, as a menu element or button.
  * 
  * You must set the the elementTemplateName in the template,
- * in the showForRoles directive. Eg *showForRoles="showForRoles('map')".
- * --> map is the elementTemplateName to show - hide, depending on
- * the groups, or roles, of the user.
+ * in the showForRoles directive. Eg:
+ *  <button *showForRoles="showForRoles('admin-menu')" cdkMenuItem ....>Admin</button>
+ *        'admin-menu' is the elementTemplateName to show - hide, depending on
+ *        the groups, or roles, of the user.
+ * 
  * In the component you must have a method called showForRoles:
  *  showForRoles(elementTemplateName): string[]
  *      return this.showForRolesService.getAllowedRoles('app.component', elementTemplateName)
- * Manually set, in the methid 'getAllowedRoles' the name of the component, template elements name, 
+ * 
+ * Manually set, in the method 'getAllowedRoles' of this service 
+ * the name of the component, template elements name, 
  * and the groups that are able to see the component template object.
+ * 
 */
 @Injectable({
   providedIn: 'root'
