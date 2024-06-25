@@ -11,7 +11,7 @@
             </div>
             <div class="menu-left-menu-options hide-less-500" cdkMenu>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Inicio</button>
-                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
+                <button *showForRoles="['mapa']" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app">App</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="help">Ayuda</button>
                 <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="about">Acerca de</button>
@@ -51,7 +51,7 @@
     <mat-drawer #appDrawerLeft class="drawer-left" mode="over" opened="false" position="start">
         <div class="drawer-left-menu-options border-top-white" cdkMenu>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >home</mat-icon>Inicio</button>
-            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="map" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >map</mat-icon>Mapa</button>
+            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="map" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >map</mat-icon>Mapa</button>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >help</mat-icon>Ayuda</button>
             <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>

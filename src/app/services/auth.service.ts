@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
-import { arrayToString } from '../utilities/general';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +20,6 @@ export class AuthService {
     this.isLoggedIn=false;
     this.username=''
     this.userGroups=[];
-  }
-
-  getUsergroupsAsString(){
-    return arrayToString(this.userGroups);
   }
 
 }

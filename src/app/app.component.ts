@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { AuthService } from './services/auth.service';
 import { MessageComponent } from './components/message/message.component';
 import { SidenavsService } from './services/sidenavs.service';
+import { ShowForRolesDirective } from './directives/show-for-roles.directive';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { SidenavsService } from './services/sidenavs.service';
   standalone: true,
   imports: [RouterOutlet,RouterLink,RouterLinkActive, 
     MatToolbarModule, MatSidenavModule, MatIconModule,
-    MessageComponent],
+    MessageComponent, ShowForRolesDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -39,7 +40,7 @@ export class AppComponent implements AfterViewInit{
     return this.authService.username;
   }
   getUsergroups(){
-    return this.authService.getUsergroupsAsString();    
+    return this.authService.userGroups.join(', ');    
   }
   getUserLoggedIn(){return this.authService.isLoggedIn}
 

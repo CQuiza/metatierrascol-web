@@ -144,22 +144,9 @@ export function getBoolean(value: any): boolean{
     }
     return false;
 }
-
-export function arrayToString(arrayofElements: any[], separator:string = ","){
-  /**
-   * Transforms an array of elements to a string
-   * eg: ['a', 'b', 2] --> 'a, b, 2'
-   */
-  if (arrayofElements.length==0){return ""}
-  var s="";
-  arrayofElements.forEach(e => {
-    s = s + e.toString() + ', '
-  });
-  s = s.substring(0, s.length - 2);
-  return s
-}
-
-export function isAnyOfTheseValuesInArray(searchArray: any[], valuesArray:any[]){
+export function isAnyOfTheseValuesInArray(searchArray: any[], valuesArray:any[] | undefined){
+  if (valuesArray == undefined){return false}
+  
   var itIs=false;
   for (let v of valuesArray){
     if (isObjectInArray(searchArray,v)){
