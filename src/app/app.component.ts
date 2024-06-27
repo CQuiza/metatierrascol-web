@@ -4,18 +4,18 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
 import { AuthService } from './services/auth.service';
-import { MessageComponent } from './components/message/message.component';
 import { SidenavsService } from './services/sidenavs.service';
 import { ShowForRolesDirective } from './directives/show-for-roles.directive';
 import { ShowForRolesService } from './services/show-for-roles.service';
-
+import { AuthUserModel } from './models/authUserModel';
+import { GlobalMessageComponent } from './components/messages/global-message/global-message.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,RouterLink,RouterLinkActive, 
     MatToolbarModule, MatSidenavModule, MatIconModule,
-    MessageComponent, ShowForRolesDirective],
+    ShowForRolesDirective, GlobalMessageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -25,9 +25,17 @@ export class AppComponent implements AfterViewInit{
   @ViewChild('appDrawerLeft') appDrawerLeft: MatDrawer = {} as MatDrawer;
   @ViewChild('appDrawerRight') appDrawerRight: MatDrawer = {} as MatDrawer;
 
+  authUserModel:AuthUserModel = new AuthUserModel('',new Date('1500/01/01'),[],'');
+
   constructor (private authService: AuthService, private sidenavsService: SidenavsService,
     private showForRolesService: ShowForRolesService){
-    authService.login();
+
+    authService.authUserSubject.subscribe({
+      next: (value) => {
+        this.authUserModel=value;
+      }
+    })
+    authService.isValidToken();
   }
   toggleAppDrawerLeft(){
     this.sidenavsService.toggleAppDrawerLeft();
@@ -38,13 +46,6 @@ export class AppComponent implements AfterViewInit{
   toggleShowMessages(){
     this.showMessages=!this.showMessages;
   }
-  getUsername(){
-    return this.authService.username;
-  }
-  getUsergroups(){
-    return this.authService.userGroups.join(', ');    
-  }
-  getUserLoggedIn(){return this.authService.isLoggedIn}
 
   showForRoles(elementTemplateName:string):string[]{
     return this.showForRolesService.getAllowedRoles('app.component', elementTemplateName);

@@ -11,7 +11,7 @@ export const belongsToGroupGuard: CanActivateFn = (route, state) => {
   var router: Router = inject(Router);
   const allowedGroups = route.data?.['allowedGroups'];
   var authService: AuthService = inject(AuthService);
-  const belongs = isAnyOfTheseValuesInArray(authService.userGroups,allowedGroups);
+  const belongs = isAnyOfTheseValuesInArray(authService.authUserModel.groups,allowedGroups);
   if (belongs){
     return belongs;
   }else{

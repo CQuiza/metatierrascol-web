@@ -18,3 +18,6 @@ si se es dueño de los datos, o se tienen permisos suficientes.
 # Requerimientos para el desarrollo 
 
 Se necesita la versión 22.2.0 de node y 18.0.3 de angular.
+
+Arrancar Chrome con CORS desactivado:
+google-chrome --disable-web-security --user-data-dir="[/home/joamona/chrome]"

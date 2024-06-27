@@ -18,14 +18,14 @@
             </div>     
         </div>
         <div class="menu-right">
-            @if (getUserLoggedIn()){
+            @if (authUserModel.isLoggedIn){
                 <div class="menu-right-columns">
-                    <div class="color-white">U: {{getUsername()}}</div>
-                    <div class="color-white">G: {{getUsergroups()}}</div>
+                    <div class="color-white">U: {{authUserModel.username}}</div>
+                    <div class="color-white">G: {{authUserModel.getGroupsAsString()}}</div>
                 </div>
             }
             <div class="menu-right-in-line">
-                @if (getUserLoggedIn()){
+                @if (authUserModel.isLoggedIn){
                     <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="logout"><mat-icon style="transform:rotate(180deg);">input</mat-icon></button>
                 }@else {
                     <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="app_user"><mat-icon>person_add</mat-icon></button>
@@ -76,7 +76,7 @@
     </mat-drawer>
     <mat-drawer-content>
         <div class="height100">
-            @if (showMessages){ <app-message></app-message>}
+            @if (showMessages){ <app-global-message></app-global-message>}
             <router-outlet></router-outlet>
         </div>
     </mat-drawer-content>
