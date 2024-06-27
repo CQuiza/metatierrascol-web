@@ -1,36 +1,29 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {FormGroup, Validators} from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {ReactiveFormsModule } from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
-//import {MatSnackBar} from "@angular/material/snack-bar";
-
-import { AuthService } from '../../../services/auth.service';
-
-import { Message } from '../../../models/message';
-
-import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
-import { sendMessages } from '../../../utilities/manageMessages';
-import { StateEnum } from '../../../enumerations/stateEnum';
-import { GlobalMessageService } from '../../../services/global-message.service';
-import { AuthUserModel } from '../../../models/authUserModel';
 import { Subscription } from 'rxjs';
 
+import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
 
+import { GlobalMessageService } from '../../../services/global-message.service';
+import { AuthService } from '../../../services/auth.service';
+
+import { sendMessages } from '../../../utilities/manageMessages';
+
+import { Message } from '../../../models/message';
+import { AuthUserModel } from '../../../models/authUserModel';
+import { StateEnum } from '../../../enumerations/stateEnum';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ComponentMessageComponent, CommonModule,
-    MatOptionModule, MatSelectModule, MatFormFieldModule,
-    MatInputModule, MatButtonModule, FormsModule, ReactiveFormsModule
+    MatInputModule, MatButtonModule, ReactiveFormsModule
 
   ],
   templateUrl: './login.component.html',

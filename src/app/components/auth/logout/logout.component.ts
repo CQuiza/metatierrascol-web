@@ -1,31 +1,24 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import {FormControl} from '@angular/forms';
-import {FormGroup, Validators} from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import {CommonModule} from '@angular/common';
-import {MatButtonModule} from "@angular/material/button";
-
-import { AuthService } from '../../../services/auth.service';
-
-import { Message } from '../../../models/message';
-
-import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
-import { sendMessages } from '../../../utilities/manageMessages';
-import { StateEnum } from '../../../enumerations/stateEnum';
-import { GlobalMessageService } from '../../../services/global-message.service';
-import { AuthUserModel } from '../../../models/authUserModel';
-
-import { SidenavsService } from '../../../services/sidenavs.service';
+import { Router} from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from "@angular/material/button";
+
+import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
+
+import { AuthService } from '../../../services/auth.service';
+import { SidenavsService } from '../../../services/sidenavs.service';
+
+import { AuthUserModel } from '../../../models/authUserModel';
+import { Message } from '../../../models/message';
 
 @Component({
   selector: 'app-logout',
   standalone: true,
   imports: [ComponentMessageComponent, CommonModule,
-    MatButtonModule, FormsModule, ReactiveFormsModule],
+    MatButtonModule, ReactiveFormsModule],
   templateUrl: './logout.component.html',
   styleUrl: './logout.component.scss'
 })
