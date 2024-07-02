@@ -7,7 +7,7 @@
     <ul class="margin-left-right-50px">
         @for (message of componentMessages;track message.id){
             <li>
-                <div class="info">
+                <div class={{message.state}}>
                     {{message.message}}
                 </div> 
             </li>

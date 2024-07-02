@@ -38,8 +38,10 @@ export class ShowForRolesService {
     switch(componentName){
         case 'app.component':{
             switch(elementTemplateName){
-                case 'admin-menu':{return ['admin'];}
-                default: {return [];}
+                case 'admin_menu':{return ['admin'];}
+                case 'user_menu':{return ['admin','propietario','agrimensor','ant','gestor_catastral', 'srn', 'igac'];}
+                default: {return [];  
+              }
             }
         }
         default: {return [];}

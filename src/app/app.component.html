@@ -10,36 +10,78 @@
                 }
             </div>
             <div class="menu-left-menu-options hide-less-500" cdkMenu>
-                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Inicio</button>
-                <button *showForRoles="showForRoles('admin-menu')" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
-                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app">App</button>
-                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="help">Ayuda</button>
-                <button cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="about">Acerca de</button>
-            </div>     
+                <button matTooltip="Inicio" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Inicio</button>
+                <button matTooltip="Mostrar mapa" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
+                <button matTooltip="Descarga de la app" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app">App</button>
+                <button 
+                    *showForRoles="getAllowedRoles('user_menu')"
+                    mat-icon-button 
+                    [matMenuTriggerFor]="userMenu" 
+                    #userMenuTrigger="matMenuTrigger" 
+                    matTooltip="Menu" 
+                    (click)="userMenuTrigger.openMenu()" 
+                    class="normal-menu-item">Menú
+                </button>
+                    <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+                        @if(authUserModel.opened_sessions > 1){
+                            <button mat-menu-item class="mat-menu-item" matTooltip="Cerrar las sesiones abiertas en otros dispositivos" routerLink="remove_sessions">
+                                Cerrar sesiones
+                            </button>    
+                        }
+                        <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg" >
+                            Listar mis propiedades
+                        </button>  
+                    </mat-menu>
+                <button 
+                    *showForRoles="getAllowedRoles('admin_menu')"
+                    mat-icon-button 
+                    [matMenuTriggerFor]="adminMenu" 
+                    #adminMenuTrigger="matMenuTrigger" 
+                    matTooltip="Menu" 
+                    (click)="adminMenuTrigger.openMenu()" 
+                    class="normal-menu-item">Admin
+                </button>
+                    <mat-menu #adminMenu="matMenu" [overlapTrigger]="false">
+                        <span>
+                            <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
+                                Admin
+                            </button>
+                            <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
+                                Admin
+                            </button>
+                        </span>
+                    </mat-menu>
+                <button matTooltip="Ayuda" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="help">Ayuda</button>
+                <button matTooltip="Acerca de" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="about">Acerca de</button>
+            </div>
+
         </div>
         <div class="menu-right">
             @if (authUserModel.isLoggedIn){
-                <div class="menu-right-columns">
-                    <div class="color-white">U: {{authUserModel.username}}</div>
-                    <div class="color-white">G: {{authUserModel.getGroupsAsString()}}</div>
+                <div>
+                    <div class="color-white">
+                        <span matTooltip="Nombre de usuario">U: {{authUserModel.username}}. </span>
+                        <span matTooltip="Número de sesiones abiertas">S: {{authUserModel.opened_sessions}}</span>
+                    </div>
+                    <div matTooltip="Grupos del usuario" class="color-white">G: {{authUserModel.getGroupsAsString()}}</div>
                 </div>
             }
-            <div class="menu-right-in-line">
+            <div>
                 @if (authUserModel.isLoggedIn){
-                    <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="logout"><mat-icon style="transform:rotate(180deg);">input</mat-icon></button>
+                    <button matTooltip="Cerrar sesión" cdkMenuItem class="normal-menu-item login-buttons" routerLink="logout"><mat-icon style="transform:rotate(180deg);">logout</mat-icon></button>
                 }@else {
-                    <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="app_user"><mat-icon>person_add</mat-icon></button>
-                    <button cdkMenuItem class="normal-menu-item login-buttons" routerLink="login"><mat-icon>input</mat-icon></button>    
+                    <button matTooltip="Solicitar usuario" cdkMenuItem class="normal-menu-item login-buttons" routerLink="app_user"><mat-icon>person_add</mat-icon></button>
+                    <button matTooltip="Iniciar sesión" cdkMenuItem class="normal-menu-item login-buttons" routerLink="login"><mat-icon>login</mat-icon></button>    
                 }
                 @if (!showMessages){
-                    <button cdkMenuItem class="normal-menu-item login-buttons" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>
+                    <button matTooltip="Mostrar registro de mensajes" cdkMenuItem class="normal-menu-item login-buttons" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>
                 }@else {
-                    <button cdkMenuItem class="normal-menu-item login-buttons icon-blue" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>
+                    <button matTooltip="Ocultar registro de mensajes" cdkMenuItem class="normal-menu-item login-buttons icon-blue" (click)="toggleShowMessages()"><mat-icon>mail_outline</mat-icon></button>
                 }
                 @if (!appDrawerRight.opened) {
-                    <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>arrow_back</mat-icon></button>
+                    <button matTooltip="Abrir menú derecho" class="normal-menu-item login-buttons" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>arrow_back</mat-icon></button>
                 }@else{
-                    <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>close</mat-icon></button>
+                    <button matTooltip="Cerrar menú derecho" class="normal-menu-item login-buttons" routerLinkActive="mat-accent" (click)="toggleAppDrawerRight()" ><mat-icon>close</mat-icon></button>
                 }
             </div>
         </div>
@@ -50,12 +92,31 @@
     <!--LEFT SIDENAV-->
     <mat-drawer #appDrawerLeft class="drawer-left" mode="over" opened="false" position="start">
         <div class="drawer-left-menu-options border-top-white" cdkMenu>
-            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >home</mat-icon>Inicio</button>
+            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >home</mat-icon>Inicio</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="map" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >map</mat-icon>Mapa</button>
-            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
-            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >help</mat-icon>Ayuda</button>
-            <button cdkMenuItem class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>
-        </div>     
+            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="mobile_app" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
+            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >help</mat-icon>Ayuda</button>
+            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>
+            <button 
+                mat-icon-button 
+                [matMenuTriggerFor]="sidenavAdminMenu" 
+                #sidenavAdminMenuTrigger="matMenuTrigger" 
+                matTooltip="Menu" 
+                (click)="sidenavAdminMenuTrigger.openMenu()"
+                class="vertical-menu-item">
+                <mat-icon>keyboard_arrow_right</mat-icon><span>Admin</span>
+            </button>
+                <mat-menu #sidenavAdminMenu="matMenu">
+                    <span>
+                        <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
+                            Admin
+                        </button>
+                        <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
+                            Admin
+                        </button>
+                    </span>
+                </mat-menu>
+            </div>     
     </mat-drawer>
 
     <!--RIGT SIDENAV-->

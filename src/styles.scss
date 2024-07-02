@@ -19,9 +19,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-direction: column;  
 }
 
+.flexbox-aling-left{
+    display: flex;
+    justify-content: left;
+    align-items:flex-start;
+}
+
 .text-align-center{
     margin-top: 10px;
     text-align: center;
+}
+
+.text-align-left{
+    text-align: left;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 /*It's applied on screens less than 400px */
@@ -29,8 +43,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     .flexbox-responsive-interior-container {width:100%;}
   }
   
-
-
 mat-form-field{
     width: 100%;
     color:white;

@@ -3,19 +3,25 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
+
 import { AuthService } from './services/auth.service';
 import { SidenavsService } from './services/sidenavs.service';
 import { ShowForRolesDirective } from './directives/show-for-roles.directive';
 import { ShowForRolesService } from './services/show-for-roles.service';
 import { AuthUserModel } from './models/authUserModel';
 import { GlobalMessageComponent } from './components/messages/global-message/global-message.component';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatNavList } from '@angular/material/list';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,RouterLink,RouterLinkActive, 
     MatToolbarModule, MatSidenavModule, MatIconModule,
-    ShowForRolesDirective, GlobalMessageComponent],
+    ShowForRolesDirective, GlobalMessageComponent, MatTooltipModule, MatMenu, MatMenuModule, MatNavList
+    ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -47,7 +53,7 @@ export class AppComponent implements AfterViewInit{
     this.showMessages=!this.showMessages;
   }
 
-  showForRoles(elementTemplateName:string):string[]{
+  getAllowedRoles(elementTemplateName:string):string[]{
     return this.showForRolesService.getAllowedRoles('app.component', elementTemplateName);
   }
 

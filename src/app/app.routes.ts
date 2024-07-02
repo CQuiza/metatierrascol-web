@@ -15,6 +15,7 @@ import { isLoggedInGuard } from './guards/is-logged-in.guard';
 import { YouDontHavePermissionComponent } from './components/auth/you-dont-have-permission/you-dont-have-permission.component';
 import { belongsToGroupGuard } from './guards/belongs-to-group.guard';
 import { BlankComponent } from './components/auth/blank/blank.component';
+import { RemoveSessionsComponent } from './components/auth/remove-sessions/remove-sessions.component';
 
 
 export const routes: Routes = [
@@ -27,6 +28,7 @@ export const routes: Routes = [
     {path: 'app_user', component:AppUserComponent},
     {path: 'login', component:LoginComponent},
     {path: 'logout', component:LogoutComponent},
+    {path: 'remove_sessions',component:RemoveSessionsComponent},
 
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
         canActivate:[belongsToGroupGuard],

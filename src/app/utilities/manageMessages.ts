@@ -56,12 +56,27 @@ export function showDRFerrorMessages(error: HttpErrorResponse, messageService: G
           }
         });
     }else{
-      var message=new Message(StateEnum.error,'Error: ' + key + ': ' + err[key]);
-      messages.push(messageService.add(message));
-      if (!(snackBar === undefined)){
-        snackBar.open('Error: ' + key + ': ' + err[key], 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+      var error2 = err[key];
+      for (let key2 in error2){
+        if (Array.isArray(error2[key2])){
+          var arrayMensajes:string[] = error2[key2];
+          arrayMensajes.forEach(mens =>{
+              var message=new Message(StateEnum.error,'Error: ' + key2 + ': ' + mens);
+              messages.push(messageService.add(message));
+              if (!(snackBar === undefined)){
+                snackBar.open('Error: ' + key + ': ' + mens, 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+              }
+          });
+        }else{
+          var message=new Message(StateEnum.error,'Error: ' + key + ': ' + err[key]);
+          messages.push(messageService.add(message));
+          if (!(snackBar === undefined)){
+            snackBar.open('Error: ' + key + ': ' + err[key], 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+          }
+        }
       }
     }
   }
   return messages;
 }
+

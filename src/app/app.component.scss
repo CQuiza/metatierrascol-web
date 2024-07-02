@@ -30,6 +30,8 @@
     font-weight: bold;
     font-size: 18px;
     height: 32px;
+    margin:0px;
+    padding:0px;
   }
 
 .vertical-menu-item{
@@ -49,18 +51,18 @@
 
 .login-buttons{
     min-width: 0px;
+    margin-right: 5px;
+    margin-left:5px;
+    padding: 0px;
 }
   
 .padding-rigth-10{
     padding-right: 10px;
 }
-.normal-menu-item:hover, .vertical-menu-item:hover{
-    background-color: rgb(208, 208, 208);
+button.normal-menu-item:hover, .vertical-menu-item:hover{
+    background-color: rgb(208, 208, 208) !important;
   }
   
-.normal-menu-item:active, .vertical-menu-item:hover {
-    background-color: rgb(170, 170, 170);
-  }
 /*Removes the default border radius*/
 .mat-drawer.mat-drawer-end{
     border-radius: 0px;
@@ -78,7 +80,7 @@
     border-radius: 0px;
 }
 .drawer-right{
-    width:500px;
+    width:600px;
     background-color: rgb(248, 213, 161);
     border-radius: 0px;
 }
@@ -104,13 +106,28 @@ rules*/
     color:blue;
 }
 
-@media all and (max-width:500px){
+@media all and (max-width:1000px){
     .menu-left-buton-burguer{display: block;}
     .hide-less-500{display: none;}
+    .drawer-right{width: 600px;}
+}
+
+@media all and (max-width:600px){
     .drawer-right{width: 100%;}
 }
-@media all and (min-width:500px){
+
+@media all and (min-width:1000px){
     .menu-left-buton-burguer{display: none;}
     .menu-left-menu-options{display: block;}
 }
 
+button.mat-menu-item {
+    background-color: #cf7310 !important; /* Cambia este color al que prefieras */
+    color: white;
+    font-weight: bolder !important;
+  }
+  
+button.mat-menu-item:hover {
+      background-color: rgb(208, 208, 208) !important;
+      color: #cf7310 !important;
+  }

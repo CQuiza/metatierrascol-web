@@ -46,7 +46,7 @@ export class LoginComponent implements OnDestroy{
   authUserSub?:Subscription;
 
   constructor(private authService:AuthService, private router:Router, private globalMessageService: GlobalMessageService){
-    this.urlDjangoApi.setValue(this.authService.apiUrl);
+    this.urlDjangoApi.setValue(this.authService.authUserModel.apiUrl);
     this.authMessagesSub=this.authService.authMessagesSubject.subscribe({
       next: componentMessages => {
         this.componentMessages = componentMessages;
