@@ -150,7 +150,7 @@ export class AuthService {
         {
           next:response=>{
             //console.log(response)
-            this.authUserModel= new AuthUserModel('',new Date('1500/01/01'),[],'',false,-1);
+            this.authUserModel= new AuthUserModel('',new Date('1500/01/01'),[],'',false,-1,this.cookieService.get('apiUrl'));
             this.authUserMessages=sendMessages(StateEnum.success,'Sesión cerrada', this.globalMessageService, this.matSnackBar)
             this.cookieService.delete('token');
             this.authUserMessages.push(sendMessages(StateEnum.success,'El resto de sesiones han sido cerradas',this.globalMessageService)[0]);

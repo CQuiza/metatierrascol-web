@@ -11,7 +11,11 @@
               @if(username.hasError('required')){<mat-error>El usuario es obligatorio.</mat-error>}
               @if(username.hasError('minlength')){<mat-error>El nombre del usuario es demasiado corto.</mat-error>}
             </mat-form-field>
-        
+            <mat-form-field>
+                <textarea matInput placeholder="¿Para qué necesita un usuario en esta aplicación?" [formControl]="interest" name="interest"></textarea>
+                @if(interest.hasError('required')){<mat-error>Describir su interés es obligatorio.</mat-error>}
+                @if(interest.hasError('minlength')){<mat-error>Debe escribir alguna cosa más.</mat-error>}
+              </mat-form-field>
             <mat-form-field>
               <input matInput type="password" placeholder="Contraseña" [formControl]="passwordFormControl1" name="passwordFormControl1">
               <mat-error *ngIf="passwordFormControl1.hasError('required')">password
@@ -31,6 +35,16 @@
                   Contraseña demasiado corta.
                 </mat-error>
               </mat-form-field>
+            <p>Demuestre que no es usted un robot. Escriba las letras que aparecen en la imagen:</p>
+            <div class="flex-row">
+                <img class="captcha" matTooltip="Escriba las letras de la imagen en el la caja de texto captcha"  src="{{srcImgCaptcha}}">
+                <mat-form-field class="width_200px">
+                    <input matInput placeholder="Letras en la imagen" [formControl]="captcha_1">
+                    <mat-error *ngIf="captcha_1.hasError('required')">
+                        Introduzca el texto que se ve en la imagen
+                    </mat-error>
+                </mat-form-field>    
+            </div>
 
             <h5>1. Autorización para el tratamiento de datos personales</h5>
 
@@ -61,12 +75,12 @@
                 email u otro medio, siempre en su propio interés, con el objetivo 
                 de regularizar su propiedad.</p>
             
-            <span><input type="checkbox" [formControl]="checkAcceptDataPolicy"> Acepto el tratamiento de mis datos persionales</span>
+            <span><input type="checkbox" [formControl]="checkAcceptDataPolicy" #accept_data (change)="changeAcceptdata(accept_data)"> Acepto el tratamiento de mis datos persionales</span>
             <br>
-            <span><input type="checkbox" [formControl]="checkAcceptEmailNotifications"> Acepto recibir notificaciones por email</span>
+            <span><input type="checkbox" [formControl]="checkAcceptEmailNotifications" #accept_notification (change)="changeAcceptNotification(accept_notification)"> Acepto recibir notificaciones por email</span>
             
             <div class="flexbox-exterior-container">
-                <button  matTooltip="Info about the action" mat-raised-button [disabled]="!controlsGroup.valid" (click)="addUser()">Solicitar</button>
+                <button  matTooltip="Enviar datos" mat-raised-button [disabled]="!controlsGroup.valid || !notification_acceptation || !data_acceptation" (click)="addUser()">Solicitar</button>
             </div>
         </form>   
         @if (componentMessages.length > 0){
