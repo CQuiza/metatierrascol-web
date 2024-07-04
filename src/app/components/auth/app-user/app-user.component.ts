@@ -77,15 +77,14 @@ export class AppUserComponent implements OnInit{
       return;
     }
 
-    this.dataService.post('core/app_user/',this.controlsGroup.value).subscribe({
+    this.dataService.post('core/user/',this.controlsGroup.value).subscribe({
       next: response => {
         console.log('response',response)
         if ('id' in response){
           var m:Message[]=sendMessages(StateEnum.success,'Su usuario ha sido añadido con éxito',this.globalMessageService, this.matSnackBar);
-          var m1:Message[]=sendMessages(StateEnum.success,'Debe esperar a que un administrador lo admita',this.globalMessageService, this.matSnackBar);
-          var m2:Message[]=sendMessages(StateEnum.success,'Recibirá un correo de aviso',this.globalMessageService, this.matSnackBar);
-          m[0].id=1;m1[0].id=2;m2[0].id=3;
-          this.componentMessages=[m[0],m1[0],m2[0]]
+          var m1:Message[]=sendMessages(StateEnum.success,'Ahora consulte su email. Debe confirmar su correo electrónico',this.globalMessageService, this.matSnackBar);
+          m[0].id=1;m1[0].id=0;
+          this.componentMessages=[m[0],m1[0]]
         }        
       },
       error:error=>{
