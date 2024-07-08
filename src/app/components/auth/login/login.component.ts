@@ -66,6 +66,10 @@ export class LoginComponent implements OnDestroy{
     this.authService.login(this.urlDjangoApi.value as string,this.username.value as string,this.password.value as string);
     //this.router.navigate(['',{outlets: {right_sidenav:['baunit']}}]);
   }
+  goToPasswordResetUrl(){
+    let url = this.authService.authUserModel.apiUrl + 'accounts/password_reset/'
+    window.open(url, "_blank");
+  }
   ngOnDestroy(): void {
     this.authMessagesSub?.unsubscribe();
     this.authUserSub?.unsubscribe();

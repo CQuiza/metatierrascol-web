@@ -39,7 +39,8 @@
                   </mat-error>
                 </mat-form-field>
                 <div class="flexbox-exterior-container">
-                    <button  matTooltip="Info about the action" mat-raised-button [disabled]="!controlsGroup.valid" (click)="login()">Iniciar sesión</button>
+                    <button  matTooltip="Click para iniciar sesión" mat-raised-button [disabled]="!controlsGroup.valid" (click)="login()">Iniciar sesión</button>
+                    <a class="blue" (click)="goToPasswordResetUrl()">¿Olvidó su contraseña?</a>
                 </div>
             </form>    
         }
