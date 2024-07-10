@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {FormControl} from '@angular/forms';
 import {FormGroup, Validators} from '@angular/forms';
@@ -16,6 +16,8 @@ import { StateEnum } from '../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../../services/data.service';
 import { MatTooltip } from '@angular/material/tooltip';
+import { environment } from '../../../../environments/environment';
+
 
 
 
@@ -60,10 +62,12 @@ export class AppUserComponent implements OnInit{
   constructor(private dataService:DataService, private globalMessageService: GlobalMessageService,
     private matSnackBar:MatSnackBar
   ){
-    this.username.setValue('joamona@upv.es');
-    this.passwordFormControl1.setValue('micarro222')
-    this.passwordFormControl2.setValue('micarro222')
-    this.interest.setValue('dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
+    if (environment.debug){
+      this.username.setValue('joamona@upv.es');
+      this.passwordFormControl1.setValue('micarro222')
+      this.passwordFormControl2.setValue('micarro222')
+      this.interest.setValue('dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
+    }
   }
 
   ngOnInit(): void {

@@ -37,12 +37,17 @@ export class ShowForRolesService {
   getAllowedRoles(componentName:string, elementTemplateName:string): string[]{
     switch(componentName){
         case 'app.component':{
-            switch(elementTemplateName){
-                case 'admin_menu':{return ['admin'];}
-                case 'user_menu':{return ['admin','propietario','agrimensor','ant','gestor_catastral', 'srn', 'igac'];}
-                default: {return [];  
-              }
-            }
+          switch(elementTemplateName){
+              case 'admin_menu':{return ['admin'];}
+              case 'user_menu':{return ['admin','propietario','agrimensor','ant','gestor_catastral', 'srn', 'igac'];}
+              default: {return [];}
+          }
+        }
+        case 'app.version.component':{
+          switch(elementTemplateName){
+            case 'upload.app.version.component':{return ['admin'];}
+            default: {return [];}
+          }
         }
         default: {return [];}
     }

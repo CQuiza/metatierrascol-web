@@ -4,7 +4,6 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 
 import { AuthService } from './services/auth.service';
 import { SidenavsService } from './services/sidenavs.service';
@@ -14,13 +13,15 @@ import { AuthUserModel } from './models/authUserModel';
 import { GlobalMessageComponent } from './components/messages/global-message/global-message.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatNavList } from '@angular/material/list';
+import { AppVersionComponent } from './components/app-version/app-version/app-version.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet,RouterLink,RouterLinkActive, 
     MatToolbarModule, MatSidenavModule, MatIconModule,
-    ShowForRolesDirective, GlobalMessageComponent, MatTooltipModule, MatMenu, MatMenuModule, MatNavList
+    ShowForRolesDirective, GlobalMessageComponent, MatTooltipModule, MatMenu, 
+    MatMenuModule, MatNavList, AppVersionComponent
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

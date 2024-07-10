@@ -7,7 +7,6 @@ import { BaunitComponent } from './components/baunit/baunit/baunit.component';
 import { PartyComponent } from './components/party/party/party.component';
 import { SourceComponent } from './components/source/source/source.component';
 import { ImageComponent } from './components/source/image/image.component';
-import { MobileAppComponent } from './components/mobile-app/mobile-app/mobile-app.component';
 import { AppUserComponent } from './components/auth/app-user/app-user.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
@@ -16,6 +15,7 @@ import { YouDontHavePermissionComponent } from './components/auth/you-dont-have-
 import { belongsToGroupGuard } from './guards/belongs-to-group.guard';
 import { BlankComponent } from './components/auth/blank/blank.component';
 import { RemoveSessionsComponent } from './components/auth/remove-sessions/remove-sessions.component';
+import { AppVersionComponent } from './components/app-version/app-version/app-version.component';
 
 
 export const routes: Routes = [
@@ -24,11 +24,11 @@ export const routes: Routes = [
     {path: 'about', component:AboutComponent},
     {path: 'map', component:MapComponent},
     {path: 'home', component:HomeComponent},
-    {path: 'mobile_app', component:MobileAppComponent},
     {path: 'app_user', component:AppUserComponent},
     {path: 'login', component:LoginComponent},
     {path: 'logout', component:LogoutComponent},
     {path: 'remove_sessions',component:RemoveSessionsComponent},
+    {path: 'app_version', component: AppVersionComponent},
 
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
         canActivate:[belongsToGroupGuard],
