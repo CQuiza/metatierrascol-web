@@ -1,4 +1,6 @@
 import {FormGroup, ValidationErrors} from '@angular/forms';
+
+
 /*
 export function getFormValidationErrors(form: FormGroup) {
 
@@ -155,4 +157,15 @@ export function isAnyOfTheseValuesInArray(searchArray: any[], valuesArray:any[] 
     }
   }
   return itIs;
+}
+
+export function formGroupToFormData(formGroup:FormGroup):FormData{
+    var formData = new FormData()
+    Object.entries(formGroup).forEach(
+      ([key, value]) => {
+        formData.append(key,value);
+      }
+    );
+    console.log(formData)
+    return formData
 }

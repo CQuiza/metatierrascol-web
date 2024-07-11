@@ -5,6 +5,7 @@ import { AuthUserModel } from '../models/authUserModel';
 import { Message } from '../models/message';
 import { AuthService } from './auth.service';
 import { Subscription } from 'rxjs';
+import { Observable } from 'ol';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +66,19 @@ export class DataService {
       this.authUserModel.apiUrl + endPointUrl,
       postParams,
       {headers: this.headers, responseType : 'json', reportProgress: false})
+  }
+
+  postUpload(endPointUrl:string, postParams:{}={}) {
+//    const data = new FormData()
+//    data.append('file', file)
+//    Object.entries(props).forEach(
+//      ([key, value]) => {
+//        data.append(key,value);
+//      }
+//    );
+    var headers: HttpHeaders = new HttpHeaders({'Authorization': this.authUserModel.getToken()});
+    return this.httpClient.post(this.authUserModel.apiUrl + endPointUrl, postParams,
+      {headers: headers, reportProgress: true, observe: 'events'},  
+    )
   }
 }

@@ -4,10 +4,17 @@
             <h5>Subir nueva versión de App de toma de datos</h5>
         </div>
         <form [formGroup]="controlsGroup">
+            <mat-form-field>
+                <input matInput placeholder="Número de versión*" type="number"  [formControl]="$any(controlsGroup).get('appVersion')" name="username">
+                @if($any(controlsGroup).get('appVersion').hasError('required')){<mat-error>Número de versión obligatoria.</mat-error>}
+              </mat-form-field>
+  
             <input hidden type="file" #fileInput (change)="onFileInput(fileInput.files)" />
-            <p #fileNameParagraph [className]="getFilenameParagraphClass()">{{ file ? file.name : 'Fichero no seleccionado' }}</p>
+            
+            <p #fileNameParagraph [className]="getFilenameParagraphClass()">{{ file ? file.name : 'Fichero de versión no seleccionado' }}</p>
+            
             <button mat-raised-button (click)="fileInput.click()">
-                {{ file ? 'Seleccionar otro fichero' : 'Seleccionar versión' }}
+                {{ file ? 'Seleccionar otro fichero' : 'Seleccionar fichero de versión' }}
             </button>
             @for (controlName of controlNames;track $index){
                 <mat-form-field>
@@ -16,6 +23,10 @@
                 </mat-form-field>
             }
             
+            @if (uploadProgress>0){
+                <mat-progress-bar mode="determinate" value="{{uploadProgress}}"></mat-progress-bar>
+            }
+            <br>
             <div class="flexbo-row">
                 <button mat-raised-button matTooltip="Añadir nota"  (click)="addnote()">Añadir nota</button>
                 <button mat-raised-button matTooltip="Eliminar última nota" [disabled]="controlNames.length<1" (click)="removeNote()">Eliminar última nota</button>
