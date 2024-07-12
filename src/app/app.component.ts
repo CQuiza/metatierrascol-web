@@ -13,7 +13,6 @@ import { AuthUserModel } from './models/authUserModel';
 import { GlobalMessageComponent } from './components/messages/global-message/global-message.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatNavList } from '@angular/material/list';
-import { AppVersionComponent } from './components/app-version/app-version/app-version.component';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +20,7 @@ import { AppVersionComponent } from './components/app-version/app-version/app-ve
   imports: [RouterOutlet,RouterLink,RouterLinkActive, 
     MatToolbarModule, MatSidenavModule, MatIconModule,
     ShowForRolesDirective, GlobalMessageComponent, MatTooltipModule, MatMenu, 
-    MatMenuModule, MatNavList, AppVersionComponent
+    MatMenuModule, MatNavList
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

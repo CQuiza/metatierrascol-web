@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild} from '@angular/core';
 
-import {FormControl} from '@angular/forms';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ReactiveFormsModule } from '@angular/forms';
-import {CommonModule} from '@angular/common';
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
+import { FormControl } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
 
 import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
 import { GlobalMessageService } from '../../../services/global-message.service';
@@ -16,7 +16,6 @@ import { StateEnum } from '../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../../services/data.service';
 import { MatTooltip } from '@angular/material/tooltip';
-import { NEVER } from 'rxjs';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
@@ -27,10 +26,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule, MatButtonModule, ReactiveFormsModule, MatTooltip,
     MatProgressBarModule
   ],
-  templateUrl: './upload-app-version.component.html',
-  styleUrl: './upload-app-version.component.scss'
+  templateUrl: './add-app-version.component.html',
+  styleUrl: './add-app-version.component.scss'
 })
-export class UploadAppVersionComponent {
+export class AddAppVersionComponent {
   @ViewChild('fileNameParagraph') fileNameParagraph: ElementRef = {} as ElementRef;
   filenameParagraphClass = 'red';
   file: File | null = null

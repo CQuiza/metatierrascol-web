@@ -33,7 +33,7 @@
                 <button mat-raised-button matTooltip="Enviar datos"  [disabled]="controlNames.length<1 || !controlsGroup.valid"  (click)="send()">Subir versión</button>
             </div>
         </form>
-            @if (componentMessages.length > 0){
+        @if (componentMessages.length > 0){
             <app-component-message [componentMessages]="componentMessages"></app-component-message>
         } 
     </div>

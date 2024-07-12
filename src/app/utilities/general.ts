@@ -160,6 +160,9 @@ export function isAnyOfTheseValuesInArray(searchArray: any[], valuesArray:any[] 
 }
 
 export function formGroupToFormData(formGroup:FormGroup):FormData{
+  /**NO tested
+   * 
+   */
     var formData = new FormData()
     Object.entries(formGroup).forEach(
       ([key, value]) => {

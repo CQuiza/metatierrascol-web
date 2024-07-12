@@ -28,15 +28,18 @@ export class ShowForRolesDirective implements OnInit{
   ngOnInit(): void {
     this.authService.authUserSubject.subscribe({
       next: value => {
+        //console.log(this.authService.authUserModel.groups)
         if (isAnyOfTheseValuesInArray(this.authService.authUserModel.groups, this.allowedRoles?.flat(1))){
           /**
            * Keeps the element of the template 
            * this.allowedRoles?.flat(1) gets an array from the allowedRoles object*/
           //console.log('Creating',this.authService.authUserModel.groups, this.allowedRoles?.flat(1))
+          console.log(true)
           this.viewContainerRef.createEmbeddedView(this.templateRef);
         }else{
           /**removes the element of the template */
           //console.log('Removing',this.authService.authUserModel.groups, this.allowedRoles?.flat(1))
+          console.log(false)
           this.viewContainerRef.clear();
         }
       }

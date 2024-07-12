@@ -15,7 +15,9 @@ import { YouDontHavePermissionComponent } from './components/auth/you-dont-have-
 import { belongsToGroupGuard } from './guards/belongs-to-group.guard';
 import { BlankComponent } from './components/auth/blank/blank.component';
 import { RemoveSessionsComponent } from './components/auth/remove-sessions/remove-sessions.component';
-import { AppVersionComponent } from './components/app-version/app-version/app-version.component';
+import { LastAppVersionComponent } from './components/app-version/last-app-version/last-app-version.component';
+import { ManageAppVersionsComponent } from './components/app-version/manage-app-versions/manage-app-versions.component';
+import { AddAppVersionComponent } from './components/app-version/add-app-version/add-app-version.component';
 
 
 export const routes: Routes = [
@@ -28,7 +30,10 @@ export const routes: Routes = [
     {path: 'login', component:LoginComponent},
     {path: 'logout', component:LogoutComponent},
     {path: 'remove_sessions',component:RemoveSessionsComponent},
-    {path: 'app_version', component: AppVersionComponent},
+    {path: 'last_app_version', component: LastAppVersionComponent},
+    {path: 'add_app_version', component: AddAppVersionComponent},
+    {path: 'manage_app_versions', component: ManageAppVersionsComponent},
+
 
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
         canActivate:[belongsToGroupGuard],

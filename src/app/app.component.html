@@ -12,7 +12,7 @@
             <div class="menu-left-menu-options hide-less-500" cdkMenu>
                 <button matTooltip="Inicio" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Inicio</button>
                 <button matTooltip="Mostrar mapa" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
-                <button matTooltip="Descarga de la app" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="app_version">App</button>
+                <button matTooltip="Descarga de la app" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="last_app_version">App</button>
                 <button 
                     *showForRoles="getAllowedRoles('user_menu')"
                     mat-icon-button 
@@ -41,16 +41,36 @@
                     (click)="adminMenuTrigger.openMenu()" 
                     class="normal-menu-item">Admin
                 </button>
+                    <!--ADMIN MENU-->
                     <mat-menu #adminMenu="matMenu" [overlapTrigger]="false">
                         <span>
                             <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
-                                Admin
+                                Sitio de administracion
                             </button>
-                            <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
-                                Admin
+                            <button mat-menu-item 
+                                matTooltip="Menú de gestión de app"
+                                [matMenuTriggerFor]="appMenu" 
+                                #appMenuTrigger="matMenuTrigger" 
+                                matTooltip="Administración de app" 
+                                (click)="appMenuTrigger.openMenu()" 
+                                class="mat-menu-item"
+                            >
+                                App
                             </button>
+
+                            <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
+                                
+                                    <button mat-menu-item class="mat-menu-item" matTooltip="Añadir versión" routerLink="add_app_version">
+                                        Añadir versión
+                                    </button>                            
+                                    <button mat-menu-item class="mat-menu-item" matTooltip="Gestionar versiones" routerLink="manage_app_versions">
+                                        Gestionar versiones
+                                    </button>
+                            
+                            </mat-menu>
                         </span>
                     </mat-menu>
+                    <!--END OF ADMIN MENU-->
                 <button matTooltip="Ayuda" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="help">Ayuda</button>
                 <button matTooltip="Acerca de" cdkMenuItem class="normal-menu-item" routerLinkActive="mat-accent" routerLink="about">Acerca de</button>
             </div>
@@ -94,7 +114,7 @@
         <div class="drawer-left-menu-options border-top-white" cdkMenu>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >home</mat-icon>Inicio</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="map" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >map</mat-icon>Mapa</button>
-            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="app_versio" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
+            <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="last_app_version" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >help</mat-icon>Ayuda</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>
             <button 
