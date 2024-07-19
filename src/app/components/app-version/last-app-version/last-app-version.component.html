@@ -18,14 +18,16 @@
             e iniciar el expediente.</p>
 
         <p>Para subir datos al servidor necesita una cuenta,
-            que puede obtener <a href="">en este enlace</a></p>
+            que puede obtener <a routerLink="/app_user">en este enlace</a></p>
         
-        <p>A todos los propietarios de los predios se les creará 
+        <!--
+         <p>A todos los propietarios de los predios se les creará 
             igualmente una cuenta para que puedan revisar sus datos
             y propiedades. Se les enviará un email de aviso,
             con un enlace para que establezcan su contraseña de 
-            acceso.</p>
-        
+            acceso.</p>           
+        -->
+
         <p>La versión actual permite lo siguiente:</p>
         
         <ul>
@@ -37,5 +39,41 @@
             <li>Enviar los datos al servidor</li>
         </ul>
     </div>
+    <div class="flexbox-responsive-interior-container">
+        @if (lastMobileAppVersionModel.id>-1){
+            <h6>Descargue la última versión de la App</h6>
+            <div class="flex_container">
+                <div>
+                    <a [href]="getUrlDescargaApp()"><img class="logo_app" src="logo.png" matTooltip="Descargar App"></a>
+                </div>
+                <div class="margin_left_30px">
+                    <p> <b>Versión: </b>{{lastMobileAppVersionModel.version}}</p>
+                    <p> <b>Fecha: </b>{{lastMobileAppVersionModel.fecha | date:'yyyy/MM/dd hh:mm a'}}</p>
+                </div>
+            </div>
+        }@else {
+            <h6>No hay versiones de la app publicadas actualmente</h6>
+        }
+    </div>
+    <div class="flexbox-responsive-interior-container flexbox-aling-left">
+        @if (lastMobileAppVersionModel.id>-1 && allAppversionsNotes.length > 0){
+            <h6>Notas sobre las versiones</h6>
+            <table>
+                <tr>
+                  <th>Version</th>
+                  <th>Nota</th>
+                </tr>
+                @for (note of allAppversionsNotes;track $index){
+                    <tr>
+                      <td>{{note.mobileappversion}}</td>
+                      <td>{{note.nota}}</td>
+                    </tr>
+                }
+            </table>
+        }@else {
+            <h6>No hay notas que describan la app</h6>
+        }
+    </div>
+    <br>
 </div>
 <app-footer></app-footer>

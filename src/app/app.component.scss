@@ -131,3 +131,15 @@ button.mat-menu-item:hover {
       background-color: rgb(208, 208, 208) !important;
       color: #cf7310 !important;
   }
+
+//Esto cambia el color de fondo del router outlet
+.back-ground-color-gray{
+    background-color: rgb(241, 237, 237);
+  }
+
+.mat-headline-medium, .mat-typography .mat-headline-medium, .mat-typography h5{
+    color: #cf7310 !important;
+}
+h6{
+    color: #cf7310 !important;
+}

@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
@@ -13,6 +13,7 @@ import { AuthUserModel } from './models/authUserModel';
 import { GlobalMessageComponent } from './components/messages/global-message/global-message.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { MatNavList } from '@angular/material/list';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -54,7 +55,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   getAllowedRoles(elementTemplateName:string):string[]{
-    return this.showForRolesService.getAllowedRoles('app.component', elementTemplateName);
+    return this.showForRolesService.getAllowedRoles(elementTemplateName);
   }
 
   ngAfterViewInit(): void {
@@ -65,5 +66,9 @@ export class AppComponent implements AfterViewInit{
      */
     this.sidenavsService.setAppDrawerLeft(this.appDrawerLeft);
     this.sidenavsService.setAppDrawerRight(this.appDrawerRight);
+  }
+  navigateToAdmin(){
+    let url= environment.apiUrl + 'admin/'
+    window.open(url,'_blank');
   }
 }

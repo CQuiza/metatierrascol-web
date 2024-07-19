@@ -59,7 +59,7 @@ export class DataService {
   /**
    * Modify data from the server
    * @param endPointUrl The url to get. eg: 'core/upload_file/'
-   * @param postParams The get parameters. eg: new HttpParams({id:25, value:'556'})
+   * @param postParams The get parameters. eg: {id:25, value:'556'}
    */
   post(endPointUrl:string, postParams:{}={}){
     return this.httpClient.post<any>(
@@ -67,6 +67,18 @@ export class DataService {
       postParams,
       {headers: this.headers, responseType : 'json', reportProgress: false})
   }
+
+    /**
+   * Modify data from the server. Updates partialy a row.
+   * @param endPointUrl The url to get. eg: 'core/upload_file/'
+   * @param postParams The get parameters. eg: {'publicar':True})
+   */
+    patch(endPointUrl:string, postParams:{}={}){
+      return this.httpClient.patch<any>(
+        this.authUserModel.apiUrl + endPointUrl,
+        postParams,
+        {headers: this.headers, responseType : 'json', reportProgress: false})
+    }
 
   postUpload(endPointUrl:string, postParams:{}={}) {
 //    const data = new FormData()

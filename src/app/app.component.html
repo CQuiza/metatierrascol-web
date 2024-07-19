@@ -9,42 +9,43 @@
                     <button class="normal-menu-item" routerLinkActive="mat-accent" (click)="toggleAppDrawerLeft()" ><mat-icon>close</mat-icon></button>
                 }
             </div>
-            <div class="menu-left-menu-options hide-less-500" cdkMenu>
+            <!--USER MENU-->
+            <div class="menu-left-menu-options hide-less-500">
                 <button matTooltip="Inicio" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="home">Inicio</button>
                 <button matTooltip="Mostrar mapa" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="map">Mapa</button>
-                <button matTooltip="Descarga de la app" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="last_app_version">App</button>
+                <button matTooltip="Descargar la app" class="normal-menu-item" routerLinkActive="mat-accent" routerLink="last_app_version">App</button>
                 <button 
-                    *showForRoles="getAllowedRoles('user_menu')"
+                    *showForRoles="getAllowedRoles('app.component.user_menu')"
                     mat-icon-button 
                     [matMenuTriggerFor]="userMenu" 
                     #userMenuTrigger="matMenuTrigger" 
-                    matTooltip="Menu" 
+                    matTooltip="Menu de usuario" 
                     (click)="userMenuTrigger.openMenu()" 
                     class="normal-menu-item">Menú
                 </button>
                     <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
                         @if(authUserModel.opened_sessions > 1){
-                            <button mat-menu-item class="mat-menu-item" matTooltip="Cerrar las sesiones abiertas en otros dispositivos" routerLink="remove_sessions">
+                            <button mat-menu-item class="mat-menu-item" routerLink="remove_sessions">
                                 Cerrar sesiones
                             </button>    
                         }
-                        <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg" >
+                        <button mat-menu-item class="mat-menu-item" routerLink="baunit_list">
                             Listar mis propiedades
                         </button>  
                     </mat-menu>
+                <!--FIN USER MENU-->
                 <button 
-                    *showForRoles="getAllowedRoles('admin_menu')"
+                    *showForRoles="getAllowedRoles('app.component.admin_menu')"
                     mat-icon-button 
                     [matMenuTriggerFor]="adminMenu" 
                     #adminMenuTrigger="matMenuTrigger" 
-                    matTooltip="Menu" 
                     (click)="adminMenuTrigger.openMenu()" 
                     class="normal-menu-item">Admin
                 </button>
                     <!--ADMIN MENU-->
-                    <mat-menu #adminMenu="matMenu" [overlapTrigger]="false">
+                    <mat-menu class="matmenu" #adminMenu="matMenu" [overlapTrigger]="false">
                         <span>
-                            <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
+                            <button mat-menu-item class="mat-menu-item" (click)="navigateToAdmin()">
                                 Sitio de administracion
                             </button>
                             <button mat-menu-item 
@@ -60,10 +61,10 @@
 
                             <mat-menu #appMenu="matMenu" [overlapTrigger]="false">
                                 
-                                    <button mat-menu-item class="mat-menu-item" matTooltip="Añadir versión" routerLink="add_app_version">
+                                    <button mat-menu-item class="mat-menu-item" routerLink="add_app_version">
                                         Añadir versión
                                     </button>                            
-                                    <button mat-menu-item class="mat-menu-item" matTooltip="Gestionar versiones" routerLink="manage_app_versions">
+                                    <button mat-menu-item class="mat-menu-item" routerLink="manage_app_versions">
                                         Gestionar versiones
                                     </button>
                             
@@ -115,28 +116,48 @@
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="home" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >home</mat-icon>Inicio</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="map" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >map</mat-icon>Mapa</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="last_app_version" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
+            <button 
+                mat-icon-button 
+                #sidenavUserMenuTrigger="matMenuTrigger" 
+                [matMenuTriggerFor]="sidenavUserMenu" 
+                (click)="sidenavUserMenuTrigger.openMenu()"
+                class="vertical-menu-item">
+                <mat-icon>keyboard_arrow_right</mat-icon><span>Menu</span>
+            </button>
+                <mat-menu #sidenavUserMenu="matMenu">
+                    
+                        <button mat-menu-item class="mat-menu-item" routerLink="remove_sessions" (click)="toggleAppDrawerLeft()">
+                            Cerrar todas mis sesiones
+                        </button>
+                        <button mat-menu-item class="mat-menu-item" routerLink="baunit_list" (click)="toggleAppDrawerLeft()">
+                            Listar mis propiedades
+                        </button>
+                    
+                </mat-menu>  
+
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="help" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10" >help</mat-icon>Ayuda</button>
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>
             <button 
                 mat-icon-button 
                 [matMenuTriggerFor]="sidenavAdminMenu" 
                 #sidenavAdminMenuTrigger="matMenuTrigger" 
-                matTooltip="Menu" 
                 (click)="sidenavAdminMenuTrigger.openMenu()"
-                class="vertical-menu-item">
+                class="vertical-menu-item"
+            >
                 <mat-icon>keyboard_arrow_right</mat-icon><span>Admin</span>
             </button>
                 <mat-menu #sidenavAdminMenu="matMenu">
-                    <span>
-                        <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
-                            Admin
+                        <button mat-menu-item class="mat-menu-item" (click)="toggleAppDrawerLeft();navigateToAdmin()">
+                            Sitio de administración
                         </button>
-                        <button mat-menu-item class="mat-menu-item" matTooltip="Mostrar mapa dfgdsfg">
-                            Admin
+                        <button mat-menu-item class="mat-menu-item" matTooltip="Añadir versión" routerLink="add_app_version" (click)="toggleAppDrawerLeft()">
+                            App. Añadir versión
+                        </button>                            
+                        <button mat-menu-item class="mat-menu-item" matTooltip="Gestionar versiones" routerLink="manage_app_versions" (click)="toggleAppDrawerLeft()">
+                            App. Gestionar versiones
                         </button>
-                    </span>
                 </mat-menu>
-            </div>     
+        </div>     
     </mat-drawer>
 
     <!--RIGT SIDENAV-->
@@ -155,7 +176,7 @@
         <router-outlet name="right_sidenav"></router-outlet>
         
     </mat-drawer>
-    <mat-drawer-content>
+    <mat-drawer-content class="back-ground-color-gray">
         <div class="height100">
             @if (showMessages){ <app-global-message></app-global-message>}
             <router-outlet></router-outlet>

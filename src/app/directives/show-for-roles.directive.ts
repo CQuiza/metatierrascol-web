@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, ViewContainerRef, TemplateRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { isAnyOfTheseValuesInArray } from '../utilities/general';
-
+import { Subject } from 'rxjs';
 /**
  * Show - hide an element template, depending of the groups of the user.
  * Eg:
@@ -18,15 +18,17 @@ import { isAnyOfTheseValuesInArray } from '../utilities/general';
   selector: '[showForRoles]',
   standalone: true
 })
-export class ShowForRolesDirective implements OnInit{
+export class ShowForRolesDirective implements OnInit, OnDestroy{
   @Input('showForRoles') allowedRoles?: any[]// the allowed roles specified 
                                           //in the template. Eg ['surveyor', 'admin']
 
+  private sub: any;
+  
   constructor(private authService: AuthService, private viewContainerRef: ViewContainerRef, 
     private templateRef: TemplateRef<any>) { }
 
   ngOnInit(): void {
-    this.authService.authUserSubject.subscribe({
+    this.sub=this.authService.authUserSubject.subscribe({
       next: value => {
         //console.log(this.authService.authUserModel.groups)
         if (isAnyOfTheseValuesInArray(this.authService.authUserModel.groups, this.allowedRoles?.flat(1))){
@@ -34,15 +36,26 @@ export class ShowForRolesDirective implements OnInit{
            * Keeps the element of the template 
            * this.allowedRoles?.flat(1) gets an array from the allowedRoles object*/
           //console.log('Creating',this.authService.authUserModel.groups, this.allowedRoles?.flat(1))
-          console.log(true)
+          //console.log(true)
           this.viewContainerRef.createEmbeddedView(this.templateRef);
         }else{
           /**removes the element of the template */
           //console.log('Removing',this.authService.authUserModel.groups, this.allowedRoles?.flat(1))
-          console.log(false)
+          //console.log(false)
           this.viewContainerRef.clear();
         }
       }
-    })
+    });
+
+    //necessary as the above is only executed in case the user login state changes
+    if (isAnyOfTheseValuesInArray(this.authService.authUserModel.groups, this.allowedRoles?.flat(1))){
+      this.viewContainerRef.createEmbeddedView(this.templateRef);
+    }else{
+      this.viewContainerRef.clear();
+    }
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

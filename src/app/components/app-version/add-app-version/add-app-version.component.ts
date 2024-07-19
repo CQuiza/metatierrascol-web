@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 
 import { FormControl } from '@angular/forms';
 import { FormGroup, Validators } from '@angular/forms';
@@ -18,6 +18,8 @@ import { DataService } from '../../../services/data.service';
 import { MatTooltip } from '@angular/material/tooltip';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Subject } from 'rxjs';
+import { MobileAppVersionModel } from '../../../models/mobileAppVersionModel';
 
 @Component({
   selector: 'app-upload-app-version',
@@ -29,7 +31,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   templateUrl: './add-app-version.component.html',
   styleUrl: './add-app-version.component.scss'
 })
-export class AddAppVersionComponent {
+export class AddAppVersionComponent implements OnDestroy{
+
+  subUploadedAppVersion = new Subject<MobileAppVersionModel>()
+
   @ViewChild('fileNameParagraph') fileNameParagraph: ElementRef = {} as ElementRef;
   filenameParagraphClass = 'red';
   file: File | null = null
@@ -54,6 +59,37 @@ export class AddAppVersionComponent {
     this.controlsGroup.addControl('fileNameInput',new FormControl('',[Validators.required]));
     this.controlsGroup.addControl('appVersion',new FormControl('',[Validators.required]));  
     this.controlsGroup.addControl('file',new FormControl(null));
+
+    this.subUploadedAppVersion.subscribe({
+      next: (mapvm:MobileAppVersionModel) => {
+        this.sendNotes(mapvm);
+        /**
+         response = {
+        "ok": true,
+        "mensaje": "Versión guardada exitosamente (2.852149 mb). Número de versión 1.0",
+        "data": [
+            {
+                "id": 1,
+                "version": 1.0,
+                "url_descarga": "http://localhost:8000/mobileappversion/mobile_app_version/download_version/1.0/",
+                "filename": "mobileappversion/1.0.apk",
+                "publicar": false,
+                "fecha": "2024-07-11T20:38:19.094210Z",
+                "creado_por": 1
+            }
+          ],
+        "error": []
+        }
+        */
+  //      this.versionNumber = response.data[0].version;
+  //      this.componentMessages = sendMessages(StateEnum.success,response.message,this.globalMessageService, this.matSnackBar);
+        
+    },
+    error:error=>{
+      this.componentMessages=manageServerErrors(error,this.globalMessageService,this.matSnackBar);
+    }
+
+    })
   }
 
   onFileInput(files: FileList | null): void {
@@ -107,10 +143,7 @@ export class AddAppVersionComponent {
                   "filename": "mobileappversion/1.0.apk",
                   "publicar": false,
                   "fecha": "2024-07-11T20:38:19.094210Z",
-                  "creado_por": {
-                      "id": 1,
-                      "username": "admin"
-                  }
+                  "creado_por": 1
               }
             ],
           "error": []
@@ -132,8 +165,10 @@ export class AddAppVersionComponent {
           break;
         case HttpEventType.Response:
           let body:any = event.body;
-          this.versionNumber = body.data[0].version;
+          var mobileAppVersionModel = body.data[0] as MobileAppVersionModel
+          this.versionNumber = body.data[0].version
           this.componentMessages = sendMessages(StateEnum.success,body.message,this.globalMessageService, this.matSnackBar);
+          this.subUploadedAppVersion.next(mobileAppVersionModel);
           break;
       }
     }, 
@@ -144,6 +179,31 @@ export class AddAppVersionComponent {
   getNotes(){
     return Object.entries(this.controlsGroup)
   }
-  
+
+  sendNotes(mavm:MobileAppVersionModel){
+    console.log(mavm)
+    var values = this.controlsGroup.value;
+    console.log(values);
+    Object.entries(values).forEach(
+      ([key, value]) => {
+        if (key.includes('note')){
+          this.componentMessages.push(sendMessages(StateEnum.info,'Enviando la nota: ' + key,this.globalMessageService)[0])
+          this.dataService.post('mobileappversion/mobile_app_version_notes/',{'mobileappversion':mavm.id,'nota':value}).subscribe({
+              next: (response:any) => {
+                //console.log(response)
+                this.componentMessages=this.componentMessages.concat(sendMessages(StateEnum.success,"Nota " + key + " añadida correctamente",this.globalMessageService));
+              },
+              error:error=>{
+                this.componentMessages=this.componentMessages.concat(manageServerErrors(error,this.globalMessageService,this.matSnackBar));
+              }
+            })
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subUploadedAppVersion.unsubscribe();
+  }
 }
 

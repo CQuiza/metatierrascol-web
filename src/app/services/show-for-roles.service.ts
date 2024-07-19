@@ -34,21 +34,14 @@ export class ShowForRolesService {
  * @param {string} elementTemplateName - the element template name
  * @returns {string[]} - Eg: ['admin', 'surveyor']
  */
-  getAllowedRoles(componentName:string, elementTemplateName:string): string[]{
-    switch(componentName){
-        case 'app.component':{
-          switch(elementTemplateName){
-              case 'admin_menu':{return ['admin'];}
-              case 'user_menu':{return ['admin','propietario','agrimensor','ant','gestor_catastral', 'srn', 'igac'];}
-              default: {return [];}
-          }
-        }
-        case 'app.version.component':{
-          switch(elementTemplateName){
-            case 'upload.app.version.component':{return ['admin'];}
-            default: {return [];}
-          }
-        }
+  getAllowedRoles(elementTemplateName:string): string[]{
+    switch(elementTemplateName){
+        case 'app.component.admin_menu':{return ['admin'];}
+        case 'app.component.user_menu':{return ['admin','propietario','agrimensor','ant','gestor_catastral', 'srn', 'igac'];}
+        case 'app.version.component.button_publish':{return ['admin'];}
+        case 'app.version.component.button_unpublish':{return ['admin'];}
+        case 'help.component.user_management':{return ['admin'];}
+        case '':{return [];}
         default: {return [];}
     }
   }

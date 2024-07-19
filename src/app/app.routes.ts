@@ -18,6 +18,7 @@ import { RemoveSessionsComponent } from './components/auth/remove-sessions/remov
 import { LastAppVersionComponent } from './components/app-version/last-app-version/last-app-version.component';
 import { ManageAppVersionsComponent } from './components/app-version/manage-app-versions/manage-app-versions.component';
 import { AddAppVersionComponent } from './components/app-version/add-app-version/add-app-version.component';
+import { BaunitListComponent } from './components/baunit/baunit-list/baunit-list.component';
 
 
 export const routes: Routes = [
@@ -33,7 +34,7 @@ export const routes: Routes = [
     {path: 'last_app_version', component: LastAppVersionComponent},
     {path: 'add_app_version', component: AddAppVersionComponent},
     {path: 'manage_app_versions', component: ManageAppVersionsComponent},
-
+    {path: 'baunit_list', component: BaunitListComponent},
 
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
         canActivate:[belongsToGroupGuard],
