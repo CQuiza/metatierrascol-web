@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { isDevMode } from '@angular/core';
 
 import { Message } from '../models/message';
@@ -15,6 +15,31 @@ export function sendMessages(status: StateEnum, message:string, messageService: 
   }
   if (isDevMode()){console.log(message)}
   return [m]
+}
+
+export function manageServerSucessMessages(response: any, messageService: GlobalMessageService, snackBar?: MatSnackBar):Message[]{
+  var messages:Message[]=[];
+  for (let key in response) {
+    if (Array.isArray(response[key])){
+      var arrayMensajes:string[] = response[key];
+      arrayMensajes.forEach( mens =>{
+          var message=new Message(StateEnum.success,'Éxito: ' + key + ': ' + mens);
+          messages.push(messageService.add(message));
+          if (!(snackBar === undefined)){
+            snackBar.open('Éxito: ' + key + ': ' + mens, 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+          }
+        });
+    }else{
+      if (typeof response[key] === 'string' || response[key] instanceof String){
+        var message=new Message(StateEnum.success,'Éxito: ' + key + ': ' + response[key]);
+          messages.push(messageService.add(message));
+          if (!(snackBar === undefined)){
+            snackBar.open('Éxito: ' + key + ': ' + response[key], 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+          }
+      }
+    }
+  }
+  return messages;
 }
 
 export function manageServerErrors(error: HttpErrorResponse, messageService: GlobalMessageService, snackBar?: MatSnackBar):Message[]{

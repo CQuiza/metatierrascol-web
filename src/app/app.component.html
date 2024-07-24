@@ -24,11 +24,9 @@
                     class="normal-menu-item">Menú
                 </button>
                     <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
-                        @if(authUserModel.opened_sessions > 1){
-                            <button mat-menu-item class="mat-menu-item" routerLink="remove_sessions">
-                                Cerrar sesiones
-                            </button>    
-                        }
+                        <button mat-menu-item class="mat-menu-item" routerLink="remove_sessions">
+                            Cerrar sesiones
+                        </button>    
                         <button mat-menu-item class="mat-menu-item" routerLink="baunit_list">
                             Listar mis propiedades
                         </button>  

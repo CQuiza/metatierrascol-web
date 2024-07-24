@@ -38,9 +38,9 @@
                     Contraseña demasiado corta.
                   </mat-error>
                 </mat-form-field>
-                <div class="flexbox-exterior-container">
+                <div class="text-align-center">
                     <button  matTooltip="Click para iniciar sesión" mat-raised-button [disabled]="!controlsGroup.valid" (click)="login()">Iniciar sesión</button>
-                    <a class="blue" (click)="goToPasswordResetUrl()">¿Olvidó su contraseña?</a>
+                    <button mat-raised-button class="blue" (click)="tooglePasswordResetEmail()">¿Olvidó su contraseña?</button>
                 </div>
             </form>    
         }
@@ -48,7 +48,10 @@
             <app-component-message [componentMessages]="componentMessages"></app-component-message>
         } 
     </div>
-
 </div>
+
+@if (showPasswordResetForm){
+  <app-password-reset-form></app-password-reset-form>
+}
 
 

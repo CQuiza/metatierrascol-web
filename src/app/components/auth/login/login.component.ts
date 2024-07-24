@@ -18,12 +18,13 @@ import { sendMessages } from '../../../utilities/manageMessages';
 import { Message } from '../../../models/message';
 import { AuthUserModel } from '../../../models/authUserModel';
 import { StateEnum } from '../../../enumerations/stateEnum';
+import { PasswordResetFormComponent } from '../password-reset-form/password-reset-form.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ComponentMessageComponent, CommonModule,
-    MatInputModule, MatButtonModule, ReactiveFormsModule
+    MatInputModule, MatButtonModule, ReactiveFormsModule, PasswordResetFormComponent
 
   ],
   templateUrl: './login.component.html',
@@ -45,6 +46,8 @@ export class LoginComponent implements OnDestroy{
   authMessagesSub?: Subscription;
   authUserSub?:Subscription;
 
+  showPasswordResetForm=false;
+
   constructor(private authService:AuthService, private router:Router, private globalMessageService: GlobalMessageService){
     this.urlDjangoApi.setValue(this.authService.authUserModel.apiUrl);
     this.authMessagesSub=this.authService.authMessagesSubject.subscribe({
@@ -55,6 +58,7 @@ export class LoginComponent implements OnDestroy{
     this.authUserSub = this.authService.authUserSubject.subscribe({
       next: authUserModel => {
         this.authUserModel=authUserModel;
+        if (this.authUserModel.isLoggedIn){this.showPasswordResetForm=false}
       }
     });
   }
@@ -69,6 +73,10 @@ export class LoginComponent implements OnDestroy{
   goToPasswordResetUrl(){
     let url = this.authService.authUserModel.apiUrl + 'accounts/password_reset/'
     window.open(url, "_blank");
+  }
+
+  tooglePasswordResetEmail(){
+    this.showPasswordResetForm = !this.showPasswordResetForm;
   }
   ngOnDestroy(): void {
     this.authMessagesSub?.unsubscribe();

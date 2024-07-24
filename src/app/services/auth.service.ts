@@ -41,6 +41,7 @@ export class AuthService {
         this.authUserModel.token = this.cookieService.get('token');
         this.updateHeaders()
       }
+
     }
 
   setApiUrl(apiUrl:string){
