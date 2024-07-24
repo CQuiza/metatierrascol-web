@@ -78,7 +78,9 @@ export class AuthService {
               if (this.cookieService.check('token')){
                 this.authUserMessages=sendMessages(StateEnum.info,'El token no existe en el navegador',this.globalMessageService);
               }else{
-                this.authUserMessages=sendMessages(StateEnum.info,'El token no es válido. Inicie sesión',this.globalMessageService);
+                this.authUserMessages=sendMessages(StateEnum.info,'El token no es válido. Se borra. Inicie sesión',this.globalMessageService);
+                this.cookieService.delete('token');
+                this.updateHeaders();
               }
             }
             this.authUserModel.username = response.username;
@@ -89,7 +91,10 @@ export class AuthService {
             this.announceAuthUserChange();
           },
           error:error=>{
+            this.cookieService.delete('token');
+            this.updateHeaders();
             this.authUserMessages=manageServerErrors(error,this.globalMessageService);
+            this.authUserMessages.concat(sendMessages(StateEnum.error,'El token ha sido borrado del dispositivo',this.globalMessageService));
             this.announceAuthUserChange();
           }
         }

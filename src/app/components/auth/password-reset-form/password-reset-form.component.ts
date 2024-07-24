@@ -42,7 +42,7 @@ export class PasswordResetFormComponent {
   ){}
 
   send(){
-    this.dataService.post('core/request_password_reset_email/',this.controlsGroup.value).subscribe({
+    this.dataService.post('core/request_reset_password_email/',this.controlsGroup.value).subscribe({
       next: response => {
         console.log('response',response)
         this.componentMessages=manageServerSucessMessages(response,this.globalMessageService, this.matSnackBar);
