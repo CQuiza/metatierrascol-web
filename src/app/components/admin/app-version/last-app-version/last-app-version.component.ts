@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 
-import { HeaderComponent } from '../../header/header.component';
-import { FooterComponent } from '../../footer/footer.component';
-import { DataService } from '../../../services/data.service';
-import { GlobalMessageService } from '../../../services/global-message.service';
-import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
-import { MobileAppVersionModel } from '../../../models/mobileAppVersionModel';
+import { HeaderComponent } from '../../../header/header.component';
+import { FooterComponent } from '../../../footer/footer.component';
+import { DataService } from '../../../../services/data.service';
+import { GlobalMessageService } from '../../../../services/global-message.service';
+import { ComponentMessageComponent } from '../../../messages/component-message/component-message.component';
+import { MobileAppVersionModel } from '../../../../models/mobileAppVersionModel';
 import { MatTooltip } from '@angular/material/tooltip';
-import { environment } from '../../../../environments/environment';
-import { Message } from '../../../models/message';
-import { manageServerErrors, sendMessages } from '../../../utilities/manageMessages';
-import { StateEnum } from '../../../enumerations/stateEnum';
+import { environment } from '../../../../../environments/environment';
+import { Message } from '../../../../models/message';
+import { manageServerErrors, sendMessages } from '../../../../utilities/manageMessages';
+import { StateEnum } from '../../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
-import { MobileAppVersionNotesModel } from '../../../models/mobileAppVersionNotesModel';
+import { MobileAppVersionNotesModel } from '../../../../models/mobileAppVersionNotesModel';
 
 @Component({
   selector: 'app-last-app-version',

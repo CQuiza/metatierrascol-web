@@ -172,3 +172,7 @@ export function formGroupToFormData(formGroup:FormGroup):FormData{
     console.log(formData)
     return formData
 }
+
+export function isNumeric(maybeNumber:string):boolean{
+  return !isNaN(+maybeNumber)
+}

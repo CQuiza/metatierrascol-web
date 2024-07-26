@@ -81,7 +81,7 @@ export class AppUserComponent implements OnInit{
       return;
     }
 
-    this.dataService.post('core/user/',this.controlsGroup.value).subscribe({
+    this.dataService.post('core/django_and_app_user/',this.controlsGroup.value).subscribe({
       next: response => {
         console.log('response',response)
         if ('id' in response){

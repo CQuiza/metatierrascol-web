@@ -1,21 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
-import { GlobalMessageService } from '../../../services/global-message.service';
-import { manageServerErrors, sendMessages } from '../../../utilities/manageMessages';
+import { ComponentMessageComponent } from '../../../messages/component-message/component-message.component';
+import { GlobalMessageService } from '../../../../services/global-message.service';
+import { manageServerErrors, sendMessages } from '../../../../utilities/manageMessages';
 
-import { Message } from '../../../models/message';
-import { StateEnum } from '../../../enumerations/stateEnum';
+import { Message } from '../../../../models/message';
+import { StateEnum } from '../../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DataService } from '../../../services/data.service';
+import { DataService } from '../../../../services/data.service';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MobileAppVersionModel } from '../../../models/mobileAppVersionModel';
+import { MobileAppVersionModel } from '../../../../models/mobileAppVersionModel';
 import { MatCardModule } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { DatePipe } from '@angular/common';
-import { ShowForRolesDirective } from '../../../directives/show-for-roles.directive';
-import { ShowForRolesService } from '../../../services/show-for-roles.service';
-import { environment } from '../../../../environments/environment';
-import { MobileAppVersionNotesModel } from '../../../models/mobileAppVersionNotesModel';
+import { ShowForRolesDirective } from '../../../../directives/show-for-roles.directive';
+import { ShowForRolesService } from '../../../../services/show-for-roles.service';
+import { environment } from '../../../../../environments/environment';
+import { MobileAppVersionNotesModel } from '../../../../models/mobileAppVersionNotesModel';
 
 @Component({
   selector: 'app-app-version',

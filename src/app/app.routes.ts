@@ -15,10 +15,11 @@ import { YouDontHavePermissionComponent } from './components/auth/you-dont-have-
 import { belongsToGroupGuard } from './guards/belongs-to-group.guard';
 import { BlankComponent } from './components/auth/blank/blank.component';
 import { RemoveSessionsComponent } from './components/auth/remove-sessions/remove-sessions.component';
-import { LastAppVersionComponent } from './components/app-version/last-app-version/last-app-version.component';
-import { ManageAppVersionsComponent } from './components/app-version/manage-app-versions/manage-app-versions.component';
-import { AddAppVersionComponent } from './components/app-version/add-app-version/add-app-version.component';
+import { LastAppVersionComponent } from './components/admin/app-version/last-app-version/last-app-version.component';
+import { ManageAppVersionsComponent } from './components/admin/app-version/manage-app-versions/manage-app-versions.component';
+import { AddAppVersionComponent } from './components/admin/app-version/add-app-version/add-app-version.component';
 import { BaunitListComponent } from './components/baunit/baunit-list/baunit-list.component';
+import { ApiSettingsComponent } from './components/admin/api-settings/api-settings.component';
 
 
 export const routes: Routes = [
@@ -35,7 +36,8 @@ export const routes: Routes = [
     {path: 'add_app_version', component: AddAppVersionComponent},
     {path: 'manage_app_versions', component: ManageAppVersionsComponent},
     {path: 'baunit_list', component: BaunitListComponent},
-
+    {path: 'api_settings', component: ApiSettingsComponent},
+    
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
         canActivate:[belongsToGroupGuard],
         data:{allowedGroups: ['topografo']}

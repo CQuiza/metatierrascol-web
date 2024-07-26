@@ -7,19 +7,19 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 
-import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
-import { GlobalMessageService } from '../../../services/global-message.service';
-import { manageServerErrors, sendMessages } from '../../../utilities/manageMessages';
+import { ComponentMessageComponent } from '../../../messages/component-message/component-message.component';
+import { GlobalMessageService } from '../../../../services/global-message.service';
+import { manageServerErrors, sendMessages } from '../../../../utilities/manageMessages';
 
-import { Message } from '../../../models/message';
-import { StateEnum } from '../../../enumerations/stateEnum';
+import { Message } from '../../../../models/message';
+import { StateEnum } from '../../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DataService } from '../../../services/data.service';
+import { DataService } from '../../../../services/data.service';
 import { MatTooltip } from '@angular/material/tooltip';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Subject } from 'rxjs';
-import { MobileAppVersionModel } from '../../../models/mobileAppVersionModel';
+import { MobileAppVersionModel } from '../../../../models/mobileAppVersionModel';
 
 @Component({
   selector: 'app-upload-app-version',

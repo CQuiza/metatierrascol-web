@@ -1,17 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ComponentMessageComponent } from '../../messages/component-message/component-message.component';
-import { GlobalMessageService } from '../../../services/global-message.service';
-import { manageServerErrors, sendMessages } from '../../../utilities/manageMessages';
+import { ComponentMessageComponent } from '../../../messages/component-message/component-message.component';
+import { GlobalMessageService } from '../../../../services/global-message.service';
+import { manageServerErrors, sendMessages } from '../../../../utilities/manageMessages';
 
-import { Message } from '../../../models/message';
-import { StateEnum } from '../../../enumerations/stateEnum';
+import { Message } from '../../../../models/message';
+import { StateEnum } from '../../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DataService } from '../../../services/data.service';
+import { DataService } from '../../../../services/data.service';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MobileAppVersionModel } from '../../../models/mobileAppVersionModel';
+import { MobileAppVersionModel } from '../../../../models/mobileAppVersionModel';
 import { AppVersionComponent } from '../app-version/app-version.component';
-import { HeaderComponent } from '../../header/header.component';
-import { FooterComponent } from '../../footer/footer.component';
+import { HeaderComponent } from '../../../header/header.component';
+import { FooterComponent } from '../../../footer/footer.component';
 
 @Component({
   selector: 'app-manage-app-versions',
