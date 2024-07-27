@@ -176,3 +176,12 @@ export function formGroupToFormData(formGroup:FormGroup):FormData{
 export function isNumeric(maybeNumber:string):boolean{
   return !isNaN(+maybeNumber)
 }
+
+export function isStringInArrayOfStrings(searchString:string, arrayOfStrings:string[]):boolean {
+  const index = arrayOfStrings.indexOf(searchString);
+  if (index > -1) { 
+    return true;
+  } else { 
+    return false 
+  }
+}

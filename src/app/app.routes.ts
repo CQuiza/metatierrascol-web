@@ -20,6 +20,7 @@ import { ManageAppVersionsComponent } from './components/admin/app-version/manag
 import { AddAppVersionComponent } from './components/admin/app-version/add-app-version/add-app-version.component';
 import { BaunitListComponent } from './components/baunit/baunit-list/baunit-list.component';
 import { ApiSettingsComponent } from './components/admin/api-settings/api-settings.component';
+import { DjangoAndAppUsersComponent } from './components/admin/django-and-app-users/django-and-app-users.component';
 
 
 export const routes: Routes = [
@@ -37,6 +38,7 @@ export const routes: Routes = [
     {path: 'manage_app_versions', component: ManageAppVersionsComponent},
     {path: 'baunit_list', component: BaunitListComponent},
     {path: 'api_settings', component: ApiSettingsComponent},
+    {path: 'manage_django_and_app_users', component: DjangoAndAppUsersComponent},
     
     {path: 'baunit', component:BaunitComponent, outlet:'right_sidenav',
         canActivate:[belongsToGroupGuard],

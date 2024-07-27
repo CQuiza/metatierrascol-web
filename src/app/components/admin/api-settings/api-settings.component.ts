@@ -7,14 +7,10 @@ import { Message } from '../../../models/message';
 import { StateEnum } from '../../../enumerations/stateEnum';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../../services/data.service';
-import { MatTooltip } from '@angular/material/tooltip';
 import { HeaderComponent } from '../../header/header.component';
 import { FooterComponent } from '../../footer/footer.component';
 import { SettingModel } from '../../../models/settingModel';
-import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { FormControl, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+
 import { ApiSettingComponent } from './api-setting/api-setting.component';
 
 @Component({
