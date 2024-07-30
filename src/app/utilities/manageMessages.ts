@@ -81,13 +81,37 @@ export function showDRFerrorMessages(error: HttpErrorResponse, messageService: G
           }
         });
     }else{
-      var message=new Message(StateEnum.error,'Error: ' + key + ': ' + err[key]);
-      messages.push(messageService.add(message));
-      if (!(snackBar === undefined)){
-        snackBar.open('Error: ' + key + ': ' + err[key], 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+      if (typeof err[key] === 'string' || err[key] instanceof String){
+        var message=new Message(StateEnum.error,'Error: ' + key + ': ' + err[key]);
+        messages.push(messageService.add(message));
+        if (!(snackBar === undefined)){
+          snackBar.open('Error: ' + key + ': ' + err[key], 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+        }
+      }else{
+        var obj = err[key];
+        for (let key2 in obj) {
+          if (Array.isArray(obj[key2])){
+            var arrayMensajes:string[] = obj[key2];
+            arrayMensajes.forEach( mens =>{
+                var message=new Message(StateEnum.error,'Error: ' + key2 + ': ' + mens);
+                messages.push(messageService.add(message));
+                if (!(snackBar === undefined)){
+                  snackBar.open('Error: ' + key2 + ': ' + mens, 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+                }
+              });
+          }else{
+            if (typeof obj[key2] === 'string' || obj[key2] instanceof String){
+              var message=new Message(StateEnum.error,'Error: ' + key2 + ': ' + obj[key2]);
+              messages.push(messageService.add(message));
+              if (!(snackBar === undefined)){
+                snackBar.open('Error: ' + key2 + ': ' + obj[key2], 'Cerrar', { duration: 3000, verticalPosition: 'bottom' });
+              }
+            }//
+          }
+        }//for
       }
-    }
-  }
+    }//else
+  }//for
   return messages;
 }
 

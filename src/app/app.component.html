@@ -27,7 +27,7 @@
                         <button mat-menu-item class="mat-menu-item" routerLink="remove_sessions">
                             Cerrar sesiones
                         </button>    
-                        <button mat-menu-item class="mat-menu-item" routerLink="baunit_list">
+                        <button mat-menu-item class="mat-menu-item" routerLink="baunit_list" [queryParams]="{mode: 'creado_por'}">
                             Listar mis propiedades
                         </button>  
                     </mat-menu>
@@ -75,6 +75,10 @@
                                     </button>
                             
                             </mat-menu>
+                            <button mat-menu-item class="mat-menu-item"  routerLink="baunit_list" [queryParams]="{mode: 'admin'}">
+                                Ver todos los predios
+                            </button>
+    
                         </span>
                     </mat-menu>
                     <!--END OF ADMIN MENU-->
@@ -124,6 +128,7 @@
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="last_app_version" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">get_app</mat-icon>App</button>
             <button 
                 mat-icon-button 
+                *showForRoles="getAllowedRoles('app.component.user_menu')"
                 #sidenavUserMenuTrigger="matMenuTrigger" 
                 [matMenuTriggerFor]="sidenavUserMenu" 
                 (click)="sidenavUserMenuTrigger.openMenu()"
@@ -135,7 +140,7 @@
                         <button mat-menu-item class="mat-menu-item" routerLink="remove_sessions" (click)="toggleAppDrawerLeft()">
                             Cerrar todas mis sesiones
                         </button>
-                        <button mat-menu-item class="mat-menu-item" routerLink="baunit_list" (click)="toggleAppDrawerLeft()">
+                        <button mat-menu-item class="mat-menu-item" routerLink="baunit_list" [queryParams]="{mode: 'creado_por'}" (click)="toggleAppDrawerLeft()">
                             Listar mis propiedades
                         </button>
                     
@@ -145,6 +150,7 @@
             <button class="vertical-menu-item" routerLinkActive="mat-accent" routerLink="about" (click)="toggleAppDrawerLeft()"><mat-icon class="padding-rigth-10">people</mat-icon>Acerca de</button>
             <button 
                 mat-icon-button 
+                *showForRoles="getAllowedRoles('app.component.admin_menu')"
                 [matMenuTriggerFor]="sidenavAdminMenu" 
                 #sidenavAdminMenuTrigger="matMenuTrigger" 
                 (click)="sidenavAdminMenuTrigger.openMenu()"
@@ -153,15 +159,22 @@
                 <mat-icon>keyboard_arrow_right</mat-icon><span>Admin</span>
             </button>
                 <mat-menu #sidenavAdminMenu="matMenu">
-                        <button mat-menu-item class="mat-menu-item" (click)="toggleAppDrawerLeft();navigateToAdmin()">
-                            Sitio de administración
+                        <button mat-menu-item class="mat-menu-item"  routerLink="manage_django_and_app_users" (click)="toggleAppDrawerLeft()">
+                            Gestionar usuarios
                         </button>
-                        <button mat-menu-item class="mat-menu-item" matTooltip="Añadir versión" routerLink="add_app_version" (click)="toggleAppDrawerLeft()">
+                        <button mat-menu-item class="mat-menu-item"  routerLink="api_settings" (click)="toggleAppDrawerLeft()">
+                            Configurar servidor
+                        </button>
+                        <button mat-menu-item class="mat-menu-item"  routerLink="add_app_version" (click)="toggleAppDrawerLeft()">
                             App. Añadir versión
                         </button>                            
-                        <button mat-menu-item class="mat-menu-item" matTooltip="Gestionar versiones" routerLink="manage_app_versions" (click)="toggleAppDrawerLeft()">
+                        <button mat-menu-item class="mat-menu-item"  routerLink="manage_app_versions" (click)="toggleAppDrawerLeft()">
                             App. Gestionar versiones
                         </button>
+                        <button mat-menu-item class="mat-menu-item"  routerLink="baunit_list" [queryParams]="{mode: 'admin'}" (click)="toggleAppDrawerLeft()">
+                            Ver todos los predios
+                        </button>
+                        
                 </mat-menu>
         </div>     
     </mat-drawer>

@@ -33,7 +33,7 @@ export class AuthService {
       if (apiUrlCookieExists){
         this.authUserModel.apiUrl = this.cookieService.get('apiUrl');
       }else{
-        this.cookieService.set('apiUrl', environment.apiUrl);
+        this.cookieService.set('apiUrl', environment.apiUrl,365);
         this.authUserModel.apiUrl = environment.apiUrl;
       }
       const tokenCookieExists: boolean = cookieService.check('token');
@@ -45,7 +45,7 @@ export class AuthService {
     }
 
   setApiUrl(apiUrl:string){
-    this.cookieService.set('apiUrl', apiUrl);
+    this.cookieService.set('apiUrl', apiUrl,365);
     this.authUserModel.apiUrl=apiUrl;
   }
 
@@ -119,7 +119,7 @@ export class AuthService {
             //response contains only properties, not methods
             //doe to that I create an AuthUserModel manually
             this.authUserModel=new AuthUserModel(response.username, response.expiry,response.groups, response.token,true, response.opened_sessions);
-            this.cookieService.set('token', this.authUserModel.token);
+            this.cookieService.set('token', this.authUserModel.token,7);
             this.authUserMessages=sendMessages(StateEnum.success,'Sesión iniciada correctamente', this.globalMessageService, this.matSnackBar)
             this.updateHeaders();
             this.announceAuthUserChange();
