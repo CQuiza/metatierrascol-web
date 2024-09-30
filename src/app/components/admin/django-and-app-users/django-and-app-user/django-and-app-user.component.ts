@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Message } from '../../../../models/message';
 import { ComponentMessageComponent } from '../../../messages/component-message/component-message.component';
 import { DataService } from '../../../../services/data.service';
@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
-import { isStringInArrayOfStrings } from '../../../../utilities/general';
+import { deleteObjectsFromArray, isStringInArrayOfStrings } from '../../../../utilities/general';
 import { manageServerErrors, manageServerSucessMessages, sendMessages } from '../../../../utilities/manageMessages';
 import { StateEnum } from '../../../../enumerations/stateEnum';
 import { DjangoAndAppUserModel } from '../../../../models/djangoAndAppUserModel';
@@ -16,6 +16,7 @@ import { DjangoGroupModel } from '../../../../models/djangoGroupModel';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ReplacePipe } from '../../../../pipes/replace.pipe';
 import { AuthService } from '../../../../services/auth.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-django-and-app-user',
@@ -25,7 +26,7 @@ import { AuthService } from '../../../../services/auth.service';
     templateUrl: './django-and-app-user.component.html',
     styleUrl: './django-and-app-user.component.scss'
   })
-  export class DjangoAndAppUserComponent implements OnInit{
+  export class DjangoAndAppUserComponent implements OnInit, AfterViewInit{
     @Input() user: DjangoAndAppUserModel = new DjangoAndAppUserModel(-1,-1,'','',false,'',false,new Date('6666-01-01'),false,'',false,[],false,new Date('6666-01-01'));
     @Input() groups: DjangoGroupModel[] = [];
   componentMessages:Message[]=[];
@@ -52,6 +53,9 @@ import { AuthService } from '../../../../services/auth.service';
     public matSnackBar: MatSnackBar, public authService: AuthService
   ){}
   ngOnInit(): void {
+  }
+
+  refreshComponent(){
     if (this.user.is_superuser && this.user.username == this.authService.authUserModel.username){
       this.componentMessages.push(sendMessages(
         StateEnum.info,"El control para superadministrador está deshabilitado. No puede eliminarse del grupo usted mismo",
@@ -78,9 +82,10 @@ import { AuthService } from '../../../../services/auth.service';
     if (isStringInArrayOfStrings('ant', this.user.user_groups)){this.ant=true}
     if (isStringInArrayOfStrings('snr', this.user.user_groups)){this.snr=true}
     if (isStringInArrayOfStrings('receptor_email_nuevos_usuarios', this.user.user_groups)){this.receptor_email_nuevos_usuarios=true}
-    if (isStringInArrayOfStrings('admin', this.user.user_groups)){this.receptor_email_usuario_sube_predio=true}
+    if (isStringInArrayOfStrings('receptor_email_usuario_sube_predio', this.user.user_groups)){this.receptor_email_usuario_sube_predio=true}
     if (isStringInArrayOfStrings('propietario', this.user.user_groups)){this.propietario=true}
   }
+
   isItsOwnAdminSession():boolean{
     if (this.user.is_superuser && this.user.username == this.authService.authUserModel.username){
       return true;
@@ -94,6 +99,7 @@ import { AuthService } from '../../../../services/auth.service';
       next: response => {
         this.componentMessages.push(new Message(StateEnum.success,"Usuario cambiado. is_superuser: " + response.is_superuser.toString()));
         this.user.is_superuser=response.is_superuser;
+        this.refreshComponent()
       },
       error:error=>{
         this.componentMessages=manageServerErrors(error,this.globalMessageService,this.matSnackBar);
@@ -106,6 +112,7 @@ import { AuthService } from '../../../../services/auth.service';
       next: response => {
         this.componentMessages.push(new Message(StateEnum.success,"Usuario cambiado. is_active: " + response.is_active.toString()));
         this.user.is_active = response.is_active;
+        this.refreshComponent();
       },
       error:error=>{
         this.componentMessages=manageServerErrors(error,this.globalMessageService,this.matSnackBar);
@@ -118,6 +125,7 @@ import { AuthService } from '../../../../services/auth.service';
       next: response => {
         this.componentMessages.push(new Message(StateEnum.success,"Email confirmado. email_confirmed: " + response.email_confirmed.toString()));
         this.user.email_confirmed=response.email_confirmed;
+        this.refreshComponent();
       },
       error:error=>{
         this.componentMessages=manageServerErrors(error,this.globalMessageService,this.matSnackBar);
@@ -136,19 +144,18 @@ import { AuthService } from '../../../../services/auth.service';
     this.dataService.post(endPoint,{'groupId':groupId}).subscribe({
       next: response => {
         this.componentMessages.push(manageServerSucessMessages(response,this.globalMessageService)[0]);
+        if (event.checked){
+          this.user.user_groups.push(groupName);
+        }else{
+          deleteObjectsFromArray(this.user.user_groups,[groupName])
+        }
+        this.refreshComponent();
       },
       error:error=>{
         this.componentMessages=manageServerErrors(error,this.globalMessageService,this.matSnackBar);
       }
     });
   }
-
-
-
-
-
-
-
 
   onChangeGroupAdmin(event:any){
     this.dataService.patch('core/django_user_groups_update/' + this.user.user_id.toString() + '/add_user_to_group/' + this.user.user_id.toString() + '/',{'email_confirmed':event.checked}).subscribe({
@@ -161,40 +168,7 @@ import { AuthService } from '../../../../services/auth.service';
       }
     });
   }
-  onChangeGroupGestorCatastral(event:any){
-
-  }
-  onChangeGroupIgac(event:any){
-
-  }
-
-  onChangeGroupReceptorEmailUsuarioConfirmaEmail(event:any){
-
-  }
-
-  onChangeGroupForjandoFuturos(event:any){
-
-  }
   
-  onChangeGroupPropietario(event:any){
-
-  }
-
-  onChangeGroupAnt(event:any){
-
-  }
-
-  onChangeGroupSnr(event:any){
-
-  }
-
-  onChangeGroupReceptorEmailNuevosUsuarios(event:any){
-
-  }
-
-  onChangeGroupReceptorEmailUsuarioSubePredio(event:any){
-
-  }
   getGroupIdFromGroupName(groupName:string):number{
     var n=-1;
     for (let g of this.groups){
@@ -207,5 +181,10 @@ import { AuthService } from '../../../../services/auth.service';
       this.componentMessages.push(sendMessages(StateEnum.error,'Grupo ' + groupName + ' no encontrado',this.globalMessageService)[0])
     }
     return n
+  }
+
+  ngAfterViewInit(): void {
+
+    this.refreshComponent();
   }
 }

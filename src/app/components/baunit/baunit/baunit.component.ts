@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BaunitModel } from '../../../models/baunitModel';
+import { BaunitModel, createDummyBaunit } from '../../../models/baunitModel';
 import { environment } from '../../../../environments/environment';
 import {MatIconModule} from '@angular/material/icon';
 import { HeaderComponent } from '../../header/header.component';
@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './baunit.component.scss'
 })
 export class BaunitComponent {
-  @Input() baunit: BaunitModel = new BaunitModel(-1,'',new Date('6666-01-01'),'','','','','',-1,'','','','',-1,-1,'');
+  @Input() baunit: BaunitModel = createDummyBaunit();
   constructor(){}
   getUrlDownload(){
     return environment.apiUrl + 'source/descarga_zip_codigo_acceso/' + this.baunit.codigo_acceso + '/';

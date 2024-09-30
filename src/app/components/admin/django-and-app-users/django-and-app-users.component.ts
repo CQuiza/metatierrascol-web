@@ -53,6 +53,7 @@ import { isStringInArrayOfStrings } from '../../../utilities/general';
     this.getSetting();   
     this.getGroups(); 
   }
+
   getSetting(){
     let endPoint = 'core/app_settings/get_parameter_value_by_name/';
     this.dataService.post(endPoint,{'parameter_name':'numero_maximo_de_filas_recuperadas'}).subscribe({
@@ -69,6 +70,7 @@ import { isStringInArrayOfStrings } from '../../../utilities/general';
   }
 
   getGroups(){
+    this.groups=[];
     let endPoint = 'core/django_groups/';
     this.dataService.get(endPoint).subscribe({
       next: response => {
@@ -103,6 +105,7 @@ import { isStringInArrayOfStrings } from '../../../utilities/general';
   }
 
   getUsers(mode: number){
+    this.users=[];
     var endPoint:string='';
     //generates an object that admists new properties
     //obj['new_property']=value
@@ -124,7 +127,7 @@ import { isStringInArrayOfStrings } from '../../../utilities/general';
     }
     this.dataService.post(endPoint,obj).subscribe({
       next: response => {
-        this.users= response.data as DjangoAndAppUserModel[];
+        this.users = response.data as DjangoAndAppUserModel[];
         this.componentMessages = sendMessages(StateEnum.success,response.message,this.globalMessageService,this.matSnackBar)      
       },
       error:error=>{

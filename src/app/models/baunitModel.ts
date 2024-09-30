@@ -10,6 +10,7 @@ export class BaunitModel {
     public departamento: string,
     public sector_predio: string,
     public municipio: number,
+    public vereda: string,
     public numero_predial: string,
     public tipo: string,
     public complemento: string,
@@ -18,4 +19,8 @@ export class BaunitModel {
     public latitud: number,
     public numero_catastral: string
   ) {}
+}
+
+export function createDummyBaunit(): BaunitModel{
+  return new BaunitModel(-1,'',new Date('6666-01-01'),'','','','','',-1,'','','','','',-1,-1,'');
 }

@@ -185,3 +185,11 @@ export function isStringInArrayOfStrings(searchString:string, arrayOfStrings:str
     return false 
   }
 }
+
+
+
+function delay(ms: number) {
+  //Use like this:
+  //await delay(1000);
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
